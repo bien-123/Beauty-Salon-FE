@@ -1,12 +1,12 @@
 import Header from '../../layouts/component/Header/HeaderLayout';
-// import Content from '../../layouts/component/ContentLayout';
+import ContentIntroduce from './Content';
 import FormInput from '../../layouts/component/FormInput';
 import Footer from '../../layouts/component/FooterLayout';
 const Introduce = () => {
     return (
         <>
             <Header />
-            {/* <Content /> */}
+            <ContentIntroduce />
             <FormInput />
             <Footer />
         </>
