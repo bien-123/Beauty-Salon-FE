@@ -2,15 +2,17 @@ import IconFB from '../../assets/icons/icon-fb.png';
 import IconPhone from '../../assets/icons/icon-phone-1.png';
 import IconTikTok from '../../assets/icons/icon-tt.png';
 import LogoMain from '../../assets/logo/logo_main.jpg';
+import { Link } from 'react-router-dom';
+import config from '../../config';
 const Footer = () => {
     return (
         <>
             <hr />
             <div className="flex w-[1280px] m-auto gap-3 grid !grid-cols-3 py-6">
                 <div className="flex flex-col items-center justify-center">
-                    <a href="/">
+                    <Link to={config.routes.home}>
                         <img src={LogoMain} alt="Logo Main" className="w-[100px] h-[100px] rounded-[50px]" />
-                    </a>
+                    </Link>
                     <div className="flex gap-2 border-2 border-solid border-[#01babd] w-[150px] rounded-[50px] !my-4">
                         <div className="flex px-3 py-2">
                             <img src={IconPhone} alt="Icon Phone" />
@@ -35,7 +37,7 @@ const Footer = () => {
                         </a>
                     </div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col text-left">
                     <span className="text-[#01babd] font-bold text-[18px]">VIỆN THẨM MỸ BEAUTY</span>
                     {/* <span className="text-[#000] font-medium pt-1">
                     Địa chỉ: Hồ Chí Minh: Tòa nhà 383 Điện Biên Phủ, P4, Q.3
