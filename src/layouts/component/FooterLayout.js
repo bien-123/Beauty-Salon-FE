@@ -1,9 +1,10 @@
 import IconFB from '../../assets/icons/icon-fb.png';
 import IconPhone from '../../assets/icons/icon-phone-1.png';
 import IconTikTok from '../../assets/icons/icon-tt.png';
-import LogoMain from '../../assets/logo/logo_main.jpg';
 import { Link } from 'react-router-dom';
 import config from '../../config';
+import logo from '../../assets/logo/index';
+
 const Footer = () => {
     return (
         <>
@@ -11,7 +12,11 @@ const Footer = () => {
             <div className="flex w-[1280px] m-auto gap-3 grid !grid-cols-3 py-6">
                 <div className="flex flex-col items-center justify-center">
                     <Link to={config.routes.home}>
-                        <img src={LogoMain} alt="Logo Main" className="w-[100px] h-[100px] rounded-[50px]" />
+                        <img
+                            src={logo.LogoMain}
+                            alt="Logo Main"
+                            className="w-[100px] h-[100px] rounded-[50px] border-2 border-solid border-[#01babd] p-2"
+                        />
                     </Link>
                     <div className="flex gap-2 border-2 border-solid border-[#01babd] w-[150px] rounded-[50px] !my-4">
                         <div className="flex px-3 py-2">
@@ -27,14 +32,19 @@ const Footer = () => {
                             <img src={IconTikTok} alt="Icon Tiktok" />
                         </a>
                     </div>
+                    <div className="mb-1">
+                        <Link to={config.routes.payment} className="text-[#000] font-bold">
+                            Đăng nhập
+                        </Link>
+                    </div>
                     <div className="flex gap-2">
-                        <a href="/" className="text-[#000] font-bold">
+                        <Link to={config.routes.privacy} className="text-[#000] font-bold">
                             Chính sách bảo mật
-                        </a>
+                        </Link>
                         |
-                        <a href="/" className="text-[#000] font-bold">
+                        <Link to={config.routes.payment} className="text-[#000] font-bold">
                             Chính sách thanh toán
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="flex flex-col text-left">
