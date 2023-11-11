@@ -1,10 +1,10 @@
-import LogoMain from '../../../assets/logo/logo_main.jpg';
 import DangKyTuVan from '../../../assets/logo/Dang-ky-copy-3.png';
 import IconPhone from '../../../assets/icons/phone-header.png';
 import ModalHeader from './ModalHeader';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import config from '../../../config';
+import logo from '../../../assets/logo/index';
 const Header = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = (value) => {
@@ -15,7 +15,7 @@ const Header = () => {
         <>
             <div className="flex w-[1280px] h-[70px] m-auto justify-between items-center">
                 <Link to={config.routes.home}>
-                    <img src={LogoMain} alt="Logo Main" className="w-[60px] h-[60px] rounded-[50px]" />
+                    <img src={logo.LogoMain} alt="Logo Main" className="w-[60px] h-[60px] rounded-[50px]" />
                 </Link>
                 <Link to={config.routes.introduce} className="text-[#02a7aa] font-bold text-lg">
                     GIỚI THIỆU
