@@ -7,6 +7,7 @@ const routes = {
     contact: '/contact',
     payment: '/payment',
     privacy: '/privacy',
+    login: '/login',
 };
 
 export default routes;

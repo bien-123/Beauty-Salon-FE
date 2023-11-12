@@ -5,7 +5,7 @@ const FormInput = () => {
                 <div className="text-[#01babd] font-bold text-xl text-center">ĐĂNG KÝ NHẬN TƯ VẤN</div>
                 <form action="">
                     <div className="flex flex-col text-start">
-                        <label for="fname" className="mb-2 font-bold">
+                        <label htmlFor="fname" className="mb-2 font-bold">
                             Họ và tên:
                         </label>
                         <input
@@ -17,7 +17,7 @@ const FormInput = () => {
                         />
                     </div>
                     <div className="flex flex-col text-start">
-                        <label for="fphone" className="mb-2 font-bold">
+                        <label htmlFor="fphone" className="mb-2 font-bold">
                             Số điện thoại:
                         </label>
                         <input
@@ -29,7 +29,7 @@ const FormInput = () => {
                         />
                     </div>
                     <div className="flex flex-col text-start">
-                        <label for="faddress" className="mb-2 font-bold">
+                        <label htmlFor="faddress" className="mb-2 font-bold">
                             Địa chỉ:
                         </label>
                         <input
@@ -41,7 +41,7 @@ const FormInput = () => {
                         />
                     </div>
                     <div className="flex flex-col text-start">
-                        <label for="fstatus" className="mb-2 font-bold">
+                        <label htmlFor="fstatus" className="mb-2 font-bold">
                             Tình trạng hiện tại:
                         </label>
                         <textarea

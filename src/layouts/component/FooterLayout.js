@@ -33,7 +33,7 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className="mb-1">
-                        <Link to={config.routes.payment} className="text-[#000] font-bold">
+                        <Link to={config.routes.login} className="text-[#000] font-bold">
                             Đăng nhập
                         </Link>
                     </div>

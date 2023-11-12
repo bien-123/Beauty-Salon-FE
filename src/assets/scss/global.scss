@@ -1,3 +1,4 @@
+// SERVICE CSS
 table tr:nth-child(even) td {
     background-color: #f2f2f2;
 }
@@ -27,6 +28,7 @@ table {
     }
 }
 
+// ANIMATION BUTTON CSS
 .btn-register {
     animation: mymove 1s infinite cubic-bezier(0.5, 0, 0, 1);
     box-shadow: 0px 0px 2px 5px #01babd;
@@ -38,6 +40,7 @@ table {
     }
 }
 
+// GẠCH CHÂN
 .hr-underline {
     position: relative;
     margin-bottom: 4px;
@@ -49,5 +52,44 @@ table {
         background: #01babd;
         position: absolute;
         bottom: 0;
+    }
+}
+
+//LOGIN CSS
+.login-background {
+    // background: rgb(34,193,195);
+    background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+    height: 100vh;
+
+    .login-container {
+        width: 400px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 300px;
+
+        .login-content {
+            padding: 10px;
+            .btn-login {
+                width: 100%;
+                margin: 10px 0;
+                height: 35px;
+                border-radius: 15px;
+                outline: none;
+                border: none;
+                color: white;
+                font-size: 16px;
+                background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+            }
+            .forgot-password {
+                font-size: 12px;
+            }
+        }
     }
 }
