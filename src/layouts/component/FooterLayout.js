@@ -4,8 +4,23 @@ import IconTikTok from '../../assets/icons/icon-tt.png';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import logo from '../../assets/logo/index';
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
+    const [login, setLogin] = useState(false);
+
+    useEffect(() => {
+        // Lấy chuỗi JSON từ localStorage dựa vào key 'userData'
+        const storedUserDataJSON = localStorage.getItem('userData');
+
+        // Chuyển chuỗi JSON thành đối tượng JavaScript
+        const storedUserData = JSON.parse(storedUserDataJSON);
+
+        if (storedUserData) {
+            setLogin(true);
+        }
+    }, []);
+
     return (
         <>
             <hr />
@@ -33,7 +48,7 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className="mb-1">
-                        <Link to={config.routes.login} className="text-[#000] font-bold">
+                        <Link to={login ? config.routes.admin : config.routes.login} className="text-[#000] font-bold">
                             Đăng nhập
                         </Link>
                     </div>

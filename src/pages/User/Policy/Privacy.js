@@ -1,6 +1,6 @@
-import Header from '../../layouts/component/Header/HeaderLayout';
-import FormInput from '../../layouts/component/FormInput';
-import Footer from '../../layouts/component/FooterLayout';
+import Header from '../../../layouts/component/Header/HeaderLayout';
+import FormInput from '../../../layouts/component/FormInput';
+import Footer from '../../../layouts/component/FooterLayout';
 const Privacy = () => {
     return (
         <>

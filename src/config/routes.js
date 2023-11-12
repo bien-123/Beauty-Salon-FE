@@ -8,6 +8,7 @@ const routes = {
     payment: '/payment',
     privacy: '/privacy',
     login: '/login',
+    admin: '/admin',
 };
 
 export default routes;

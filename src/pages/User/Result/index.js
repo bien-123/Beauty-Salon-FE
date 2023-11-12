@@ -1,7 +1,7 @@
-import Header from '../../layouts/component/Header/HeaderLayout';
+import Header from '../../../layouts/component/Header/HeaderLayout';
 // import Content from '../../layouts/component/ContentLayout';
-import FormInput from '../../layouts/component/FormInput';
-import Footer from '../../layouts/component/FooterLayout';
+import FormInput from '../../../layouts/component/FormInput';
+import Footer from '../../../layouts/component/FooterLayout';
 const Result = () => {
     return (
         <>
