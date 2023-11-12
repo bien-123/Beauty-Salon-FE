@@ -8,6 +8,7 @@ import Result from '../pages/Result';
 import Service from '../pages/Service';
 import Payment from '../pages/Policy/Payment.js';
 import Privacy from '../pages/Policy/Privacy.js';
+import Login from '../pages/Login.js';
 
 // dùng cho Router ko cần đăng nhập vẫn xem đc
 const publicRoutes = [
@@ -22,6 +23,7 @@ const publicRoutes = [
     { path: config.routes.service, component: Service },
     { path: config.routes.payment, component: Payment },
     { path: config.routes.privacy, component: Privacy },
+    { path: config.routes.login, component: Login },
 ];
 
 // dùng cho Router phải đăng nhập mới vào đc
