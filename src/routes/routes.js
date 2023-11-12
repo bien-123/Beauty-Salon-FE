@@ -4,11 +4,12 @@ import config from '../config';
 import Home from '../pages/HomeLayout/HomeLayout.js';
 import Contact from '../pages/Contact';
 import Introduce from '../pages/Introduce';
-import Result from '../pages/Result';
-import Service from '../pages/Service';
-import Payment from '../pages/Policy/Payment.js';
-import Privacy from '../pages/Policy/Privacy.js';
+import Result from '../pages/User/Result';
+import Service from '../pages/User/Service';
+import Payment from '../pages/User/Policy/Payment.js';
+import Privacy from '../pages/User/Policy/Privacy.js';
 import Login from '../pages/Login.js';
+import HomeLayoutAdmin from '../pages/System/HomeLayoutAdmin/HomeLayoutAdmin.js';
 
 // dùng cho Router ko cần đăng nhập vẫn xem đc
 const publicRoutes = [
@@ -24,6 +25,7 @@ const publicRoutes = [
     { path: config.routes.payment, component: Payment },
     { path: config.routes.privacy, component: Privacy },
     { path: config.routes.login, component: Login },
+    { path: config.routes.admin, component: HomeLayoutAdmin },
 ];
 
 // dùng cho Router phải đăng nhập mới vào đc

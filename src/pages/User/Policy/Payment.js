@@ -1,7 +1,7 @@
-import Header from '../../layouts/component/Header/HeaderLayout';
-import FormInput from '../../layouts/component/FormInput';
-import Footer from '../../layouts/component/FooterLayout';
-import logo from '../../assets/logo/index';
+import Header from '../../../layouts/component/Header/HeaderLayout';
+import FormInput from '../../../layouts/component/FormInput';
+import Footer from '../../../layouts/component/FooterLayout';
+import logo from '../../../assets/logo/index';
 import { toaster } from 'evergreen-ui';
 const Payment = () => {
     const buttonCopyMBbank = (e) => {
