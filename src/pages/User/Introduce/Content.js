@@ -1,5 +1,5 @@
-import ImageDoctor from '../../assets/images/image-doctor.png';
-import ImageCSVC from '../../assets/images/co-so-vat-chat-tham-my-vien.jpg';
+import ImageDoctor from '../../../assets/images/image-doctor.png';
+import ImageCSVC from '../../../assets/images/co-so-vat-chat-tham-my-vien.jpg';
 const ContentIntroduce = () => {
     return (
         <>

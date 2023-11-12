@@ -1,7 +1,7 @@
-import Header from '../../layouts/component/Header/HeaderLayout';
+import Header from '../../../layouts/component/Header/HeaderLayout';
 import Content from './Content';
-import FormInput from '../../layouts/component/FormInput';
-import Footer from '../../layouts/component/FooterLayout';
+import FormInput from '../../../layouts/component/FormInput';
+import Footer from '../../../layouts/component/FooterLayout';
 const Contact = () => {
     return (
         <>

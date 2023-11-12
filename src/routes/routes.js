@@ -1,9 +1,9 @@
 import config from '../config';
 
 // file này dùng để định nghĩa các Router trong pages
-import Home from '../pages/HomeLayout/HomeLayout.js';
-import Contact from '../pages/Contact';
-import Introduce from '../pages/Introduce';
+import Home from '../pages/User/HomeLayout/HomeLayout.js';
+import Contact from '../pages/User/Contact';
+import Introduce from '../pages/User/Introduce';
 import Result from '../pages/User/Result';
 import Service from '../pages/User/Service';
 import Payment from '../pages/User/Policy/Payment.js';

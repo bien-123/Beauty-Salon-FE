@@ -64,9 +64,6 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col text-left">
                     <span className="text-[#01babd] font-bold text-[18px]">VIỆN THẨM MỸ BEAUTY</span>
-                    {/* <span className="text-[#000] font-medium pt-1">
-                    Địa chỉ: Hồ Chí Minh: Tòa nhà 383 Điện Biên Phủ, P4, Q.3
-                </span> */}
                     <span className="text-[#000] font-medium pt-1">
                         Hà Nội: Trường Đại học Lâm nghiệp Việt Nam, TT.Xuân Mai, Huyện Chương Mỹ
                     </span>
