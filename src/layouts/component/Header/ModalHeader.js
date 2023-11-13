@@ -1,4 +1,4 @@
-import { Modal, Button, Input } from 'rsuite';
+import { Modal, Input } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 
 const ModalHeader = ({ open, handleClose }) => {
