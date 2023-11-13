@@ -1,18 +1,6 @@
+@import './admin.scss';
+
 // SERVICE CSS
-table tr:nth-child(even) td {
-    background-color: #f2f2f2;
-}
-
-table tr:hover td {
-    background-color: #ffedcc;
-}
-table td {
-    background-color: #fff;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    font-weight: bold;
-}
-
 table {
     th:first-child {
         width: 25%;
@@ -26,6 +14,20 @@ table {
     th:last-child {
         width: 15%;
     }
+}
+
+table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+table tr:hover td {
+    background-color: #ffedcc;
+}
+table td {
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
 }
 
 // ANIMATION BUTTON CSS
