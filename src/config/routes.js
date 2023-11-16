@@ -9,6 +9,10 @@ const routes = {
     privacy: '/privacy',
     login: '/login',
     admin: '/admin',
+    admincustomer: '/admincustomer',
+    adminservices: '/adminservices',
+    adminappointment: '/adminappointment',
+    adminbill: '/adminbill',
 };
 
 export default routes;

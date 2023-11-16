@@ -2,7 +2,7 @@ const Content = () => {
     const headerTableTitle = ['Tên Dịch Vụ', 'Mô tả', 'Gía Dịch vụ', 'Thời gian thực hiện'];
     return (
         <div className="mt-5">
-            <table className="w-[1280px] m-auto">
+            <table className="max-w-[1280px] m-auto">
                 <thead>
                     <tr>
                         {headerTableTitle.map((item, index) => (

@@ -13,7 +13,7 @@ const Header = () => {
     const handleClose = () => setOpen(false);
     return (
         <>
-            <div className="flex w-[1280px] h-[70px] m-auto justify-between items-center">
+            <div className="flex max-w-[1280px] h-[70px] m-auto justify-between items-center">
                 <Link to={config.routes.home}>
                     <img src={logo.LogoMain} alt="Logo Main" className="w-[60px] h-[60px] rounded-[50px]" />
                 </Link>
