@@ -5,3 +5,13 @@
 .ant-btn-icon {
     background-color: #fff;
 }
+
+.ant-layout-sider {
+    // width: 350px;
+    // flex: 0 0 350px;
+    // max-width: 350px;
+    // min-width: 200px;
+    .ant-layout-sider-children {
+        width: 100%;
+    }
+}

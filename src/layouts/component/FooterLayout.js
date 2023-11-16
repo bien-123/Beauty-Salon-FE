@@ -24,7 +24,7 @@ const Footer = () => {
     return (
         <>
             <hr />
-            <div className="flex w-[1280px] m-auto gap-3 grid !grid-cols-3 py-6">
+            <div className="flex max-w-[1280px] m-auto gap-3 grid !grid-cols-3 py-6">
                 <div className="flex flex-col items-center justify-center">
                     <Link to={config.routes.home}>
                         <img
