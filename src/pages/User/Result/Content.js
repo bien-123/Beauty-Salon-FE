@@ -19,8 +19,8 @@ class Content extends Component {
                     </div>
                     <Slider {...settings}>
                         {contentResult.map((item, index) => (
-                            <div className="mr-2">
-                                <img key={index} src={item.image} alt="Hình ảnh kết quả"></img>
+                            <div className="mr-2" key={index}>
+                                <img src={item.image} alt="Hình ảnh kết quả"></img>
                             </div>
                         ))}
                     </Slider>
@@ -31,9 +31,8 @@ class Content extends Component {
                         height="523"
                         src="https://www.youtube.com/embed/1VkGfJqtRZ4"
                         title="MUA 1 TẶNG 3 – Da căng bóng, bật tông trắng sáng"
-                        frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
+                        allowFullScreen
                     ></iframe>
                 </div>
             </>
