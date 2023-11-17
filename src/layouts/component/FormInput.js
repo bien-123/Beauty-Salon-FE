@@ -13,7 +13,7 @@ const FormInput = () => {
     });
     const utcDateTime = '2023-11-16T15:55:41.206+00:00';
     const localDateTime = new Date(utcDateTime).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
-    console.log(localDateTime.split(' ').splice(0, 1).join(''));
+    // console.log(localDateTime.split(' ').splice(0, 1).join(''));
 
     const resetForm = () => {
         setAddAppoiment({
