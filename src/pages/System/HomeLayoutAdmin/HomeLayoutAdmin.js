@@ -8,7 +8,7 @@ import SiderAdmin from './SiderAdmin.js';
 
 const { Content } = Layout;
 
-const HomeLayoutAdmin = (children) => {
+const HomeLayoutAdmin = ({ children }) => {
     // Kiểm tra trạng thái đăng nhập
     const navigate = useNavigate();
     useEffect(() => {
@@ -29,7 +29,7 @@ const HomeLayoutAdmin = (children) => {
                         backgroundColor: '#F5F7FF',
                     }}
                 >
-                    Contact
+                    {children}
                 </Content>
             </Layout>
         </Layout>

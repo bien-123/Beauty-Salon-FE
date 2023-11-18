@@ -13,6 +13,7 @@ const routes = {
     adminservices: '/adminservices',
     adminappointment: '/adminappointment',
     adminbill: '/adminbill',
+    adminstaff: '/adminstaff',
 };
 
 export default routes;
