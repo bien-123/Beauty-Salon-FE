@@ -12,7 +12,7 @@ const Content = () => {
                 Phố Hà Nội cấp
             </div>
             <div className="text-xl">
-                <span className="text-[#01babd] font-semibold text-[18px]">Điện thoại: </span> 0901 35 1168
+                <span className="text-[#01babd] font-semibold text-[18px]">Điện thoại: </span> 097 103 5861
             </div>
             <div className="text-xl">
                 <span className="text-[#01babd] font-semibold text-[18px]">Email: </span>

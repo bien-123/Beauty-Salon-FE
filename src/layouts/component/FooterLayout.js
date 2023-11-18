@@ -71,12 +71,10 @@ const Footer = () => {
                         <span className="text-[#000] font-medium pt-1">
                             Hà Nội: Trường Đại học Lâm nghiệp Việt Nam, TT.Xuân Mai, Huyện Chương Mỹ
                         </span>
-                        <span className="text-[#000] font-medium pt-1">
-                            Tổng đài: 1800 6221 - 0936 20 6868 - 0939 51 8888
-                        </span>
-                        <span className="text-[#000] font-medium pt-1">Hotline: 0933 17 8686</span>
-                        <span className="text-[#000] font-medium pt-1">CSKH: 0901 35 1168 </span>
-                        <span className="text-[#000] font-medium pt-1">Giờ mở cửa: 8:30 – 20:00</span>
+                        <span className="text-[#000] font-medium pt-1">Tổng đài: 1800 0000 - 097 103 5861</span>
+                        <span className="text-[#000] font-medium pt-1">Hotline: 097 103 5861</span>
+                        <span className="text-[#000] font-medium pt-1">CSKH: 097 103 5861 </span>
+                        <span className="text-[#000] font-medium pt-1">Giờ mở cửa: 08:30 – 17:30</span>
                     </div>
                     <div>
                         <iframe
