@@ -35,13 +35,13 @@ const FormInput = () => {
     const handleClickSend = async (e) => {
         e.preventDefault();
         if (!addAppoiment.tenKH) {
-            toaster.danger('Vui lòng nhập họ tên!');
+            toaster.warning('Vui lòng nhập họ tên!');
         } else if (!addAppoiment.sdt) {
-            toaster.danger('Vui lòng nhập số điện thoại!');
+            toaster.warning('Vui lòng nhập số điện thoại!');
         } else if (!addAppoiment.ngayHen) {
-            toaster.danger('Vui lòng nhập ngày hẹn!');
+            toaster.warning('Vui lòng nhập ngày hẹn!');
         } else if (!addAppoiment.gioHen) {
-            toaster.danger('Vui lòng nhập giờ hẹn!');
+            toaster.warning('Vui lòng nhập giờ hẹn!');
         } else {
             try {
                 const res = await AppoimentServer.addAppoiment({ ...addAppoiment });
@@ -51,7 +51,7 @@ const FormInput = () => {
                 }
             } catch (error) {
                 console.error('Error:', error);
-                toaster.danger('Đã xảy ra lỗi khi gửi!');
+                toaster.warning('Đã xảy ra lỗi khi gửi!');
             }
         }
     };

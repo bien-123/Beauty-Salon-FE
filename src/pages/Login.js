@@ -38,14 +38,12 @@ const Login = () => {
         } else {
             const res = await StaffServer.login(loginForm.maNV, loginForm.password);
             if (res && res.success) {
-                toaster.success('Đặt sim thành công!');
-                // localStorage.setItem('staff', res?.existingStaff);
+                toaster.success('Đăng nhập thành công!');
                 const userDataJSON = JSON.stringify(res?.arr);
                 localStorage.setItem('userData', userDataJSON);
-                console.log(userDataJSON);
                 navigate('/admin');
             } else {
-                toaster.danger(res?.message || res?.response?.message || 'Đã xảy ra lỗi');
+                toaster.warning(res?.message || res?.response?.message || 'Đã xảy ra lỗi');
             }
         }
     };
