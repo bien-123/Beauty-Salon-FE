@@ -5,6 +5,8 @@ import { useNavigate, useLocation } from 'react-router';
 import { useMemo } from 'react';
 
 import { getDataLocalStorage, removeLocalStorage } from '../../auth';
+import { Link } from 'react-router-dom';
+import config from '../../../config';
 const { Header } = Layout;
 
 const listBreadCrumbDefault = [
@@ -84,9 +86,14 @@ const HeaderAdmin = () => {
                 </div>
                 <Popover
                     content={
-                        <Button onClick={handleLogOut} className="w-full">
-                            Logout
-                        </Button>
+                        <div>
+                            <Link to={config.routes.home}>
+                                <Button className="w-full mb-2">Trang chủ</Button>
+                            </Link>
+                            <Button onClick={handleLogOut} className="w-full">
+                                Logout
+                            </Button>
+                        </div>
                     }
                     title={
                         <div className="flex flex-col items-center">

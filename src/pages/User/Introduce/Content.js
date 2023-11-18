@@ -3,7 +3,7 @@ import ImageCSVC from '../../../assets/images/co-so-vat-chat-tham-my-vien.jpg';
 const ContentIntroduce = () => {
     return (
         <>
-            <div className="w-[1050px] m-auto text-start">
+            <div className="max-w-[1050px] m-auto text-start">
                 <div className="text-2xl text-[#02a7aa] font-bold mb-2">Viện thẩm mỹ Beauty</div>
                 <div className="bg-[#01babd66] p-[15px] text-base mb-2">
                     Viện thẩm mỹ Beauty ra đời với sứ mệnh tìm lại vẻ đẹp tự nhiên cho mọi chị em phụ nữ. Với tiền thân
