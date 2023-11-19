@@ -3,7 +3,7 @@ import ServicesServer from '../../../services/services';
 import logoEmpty from '../../../assets/logo/index';
 
 const Content = () => {
-    const headerTableTitle = ['Tên Dịch Vụ', 'Mô tả', 'Giá Dịch vụ', 'Thời gian'];
+    const headerTableTitle = ['Mã Dịch Vụ', 'Tên Dịch Vụ', 'Mô tả', 'Giá Dịch vụ', 'Thời gian'];
     const [search, setSearch] = useState('');
     const [success, setSuccess] = useState(true);
     const [duLieu, setDuLieu] = useState([]);
@@ -56,6 +56,7 @@ const Content = () => {
                         <tbody>
                             {duLieu?.map((item, index) => (
                                 <tr key={index}>
+                                    <td>{item?.maDV}</td>
                                     <td>{item?.name}</td>
                                     <td>{item?.description}</td>
                                     <td>{item?.price}</td>
