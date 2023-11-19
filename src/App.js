@@ -32,11 +32,11 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    // <Fragment>
-                                    <HomeLayoutAdmin>
-                                        <Page />
-                                    </HomeLayoutAdmin>
-                                    // </Fragment>
+                                    <Fragment>
+                                        <HomeLayoutAdmin>
+                                            <Page />
+                                        </HomeLayoutAdmin>
+                                    </Fragment>
                                 }
                             />
                         );
