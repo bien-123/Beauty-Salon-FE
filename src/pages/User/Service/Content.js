@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ServicesServer from '../../../services/services';
-import logoEmpty from '../../../assets/logo/index';
+import logo from '../../../assets/logo/index';
 
 const Content = () => {
     const headerTableTitle = ['Mã Dịch Vụ', 'Tên Dịch Vụ', 'Mô tả', 'Giá Dịch vụ', 'Thời gian'];
@@ -66,8 +66,8 @@ const Content = () => {
                         </tbody>
                     </>
                 ) : (
-                    <div>
-                        <img src={logoEmpty} alt="Logo" className="w-[200px]" />
+                    <div className="flex flex-col justify-center items-center gap-2 py-5">
+                        <img src={logo.LogoEmpty} alt="Logo" className="w-[200px]" />
                         <div className="font-bold text-2xl">Chưa có dịch vụ nào</div>
                     </div>
                 )}

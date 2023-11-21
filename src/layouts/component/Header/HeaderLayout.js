@@ -32,7 +32,7 @@ const Header = () => {
                     </Link>
                     <div className="flex items-center">
                         <img src={IconPhone} alt="Icon phone" className="w-[20px] h-[35px]"></img>
-                        <div className="ml-4">
+                        <div className="ml-4 text-lg font-bold">
                             <div>TỔNG ĐÀI 24/7</div>
                             <a href="tel:0971035861">
                                 <div className="text-[#02a7aa] font-bold text-[19px] text-center">097.103.5861</div>
