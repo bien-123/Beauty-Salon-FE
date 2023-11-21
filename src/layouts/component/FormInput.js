@@ -108,6 +108,7 @@ const FormInput = () => {
                                     <input
                                         type="time"
                                         value={addAppoiment?.gioHen}
+                                        step="2"
                                         onChange={(e) => handleChangeOrder('gioHen', e.target.value)}
                                         className="w-full p-3 rounded-md mb-2 border-none h-[44px]"
                                     />

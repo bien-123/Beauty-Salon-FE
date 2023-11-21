@@ -1,7 +1,7 @@
 import { Button, Layout } from 'antd';
 import { Link } from 'react-router-dom';
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import logo from '../../../assets/logo/index.jsx';
 import MenuAdmin from './MenuAdmin.js';
@@ -9,8 +9,23 @@ import MenuAdmin from './MenuAdmin.js';
 const { Sider } = Layout;
 const SiderAdmin = () => {
     const [collapsed, setCollapsed] = useState(false);
+
+    const handleCollapsed = (e) => {
+        e.preventDefault();
+        setCollapsed(!collapsed);
+        document.body.classList.toggle('sidebar-collapsed');
+    };
+    useEffect(() => {
+        document.body.classList.add('sidebar-collapsed');
+    }, []);
+
     return (
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Sider
+            trigger={null}
+            collapsible
+            collapsed={collapsed}
+            className={collapsed ? 'sidebar-collapse' : 'custom-ant-layout-sider'}
+        >
             <div className="demo-logo-vertical" />
             <div
                 className={`flex items-center ${
@@ -29,7 +44,7 @@ const SiderAdmin = () => {
                 <Button
                     type="text"
                     icon={collapsed ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
-                    onClick={() => setCollapsed(!collapsed)}
+                    onClick={handleCollapsed}
                     style={{
                         fontSize: '16px',
                     }}

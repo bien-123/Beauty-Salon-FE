@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { toaster } from 'evergreen-ui';
 import ServicesServer from '../../../services/services';
 
-const ServiceForm = ({ formType, setFormType, updateData }) => {
+const ServiceForm = ({ formType, setFormType, updateData, fetchData }) => {
     const [formData, setFormData] = useState({
-        maDV: '',
-        name: '',
-        description: '',
-        price: '',
-        time: '',
+        maDV: updateData?.maDV || '',
+        name: updateData?.name || '',
+        description: updateData?.description || '',
+        price: updateData?.price || '',
+        time: updateData?.time || '',
     });
 
     const handleChangeForm = (key, value) => {
@@ -22,20 +22,26 @@ const ServiceForm = ({ formType, setFormType, updateData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.name) {
+        const { maDV, name, description, price, time } = formData;
+        if (!maDV) {
+            toaster.warning('Vui lòng nhập mã dịch vụ!');
+        } else if (!name) {
             toaster.warning('Vui lòng nhập tên dịch vụ!');
-        } else if (!formData.description) {
+        } else if (!description) {
             toaster.warning('Vui lòng nhập mô tả dịch vụ!');
-        } else if (!formData.price) {
+        } else if (!price) {
             toaster.warning('Vui lòng nhập giá dịch vụ!');
-        } else if (!formData.time) {
+        } else if (!time) {
             toaster.warning('Vui lòng nhập thời gian thực hiện!');
         } else if (formType.type === 'created' && updateData === null) {
             try {
                 const res = await ServicesServer.addServices({ ...formData });
-                if (res) {
+                if (res?.data?.success) {
                     toaster.success('Thêm thông tin dịch vụ thành công!');
                     setFormType({ ...formType, open: false });
+                    fetchData();
+                } else {
+                    toaster.warning('Mã dịch vụ đã tồn tại. Bạn vui lòng nhập mã khác!');
                 }
             } catch (err) {
                 console.log('Error:', err);
@@ -46,6 +52,7 @@ const ServiceForm = ({ formType, setFormType, updateData }) => {
                 if (res) {
                     toaster.success('Cập nhật dữ liệu thành công');
                     setFormType({ ...formType, open: false });
+                    fetchData();
                 }
             } catch (err) {
                 console.log('Error:', err);
@@ -61,12 +68,7 @@ const ServiceForm = ({ formType, setFormType, updateData }) => {
         <div className=" bg-white p-[3.75rem]" style={{ padding: 60 }}>
             <Form name="wrap" labelCol={{ flex: '300px' }} labelAlign="left">
                 <div className="grid px-4 pt-15">
-                    <Form.Item
-                        name="madvbreak"
-                        label="Mã dịch vụ"
-                        rules={[{ required: true, message: 'Bạn phải nhập tên dịch vụ' }]}
-                        initialValue={updateData?.maDV}
-                    >
+                    <Form.Item name="madvbreak" label="Mã dịch vụ" initialValue={updateData?.maDV}>
                         <Input
                             id="maDV"
                             allowClear
@@ -74,12 +76,7 @@ const ServiceForm = ({ formType, setFormType, updateData }) => {
                             onChange={(e) => handleChangeForm('maDV', e.target.value)}
                         ></Input>
                     </Form.Item>
-                    <Form.Item
-                        name="namebreak"
-                        label="Tên dịch vụ"
-                        rules={[{ required: true, message: 'Bạn phải nhập tên dịch vụ' }]}
-                        initialValue={updateData?.name}
-                    >
+                    <Form.Item name="namebreak" label="Tên dịch vụ" initialValue={updateData?.name}>
                         <Input
                             id="name"
                             allowClear
@@ -87,12 +84,7 @@ const ServiceForm = ({ formType, setFormType, updateData }) => {
                             onChange={(e) => handleChangeForm('name', e.target.value)}
                         ></Input>
                     </Form.Item>
-                    <Form.Item
-                        name="description"
-                        label="Mô tả"
-                        rules={[{ required: true }]}
-                        initialValue={updateData?.description}
-                    >
+                    <Form.Item name="description" label="Mô tả" initialValue={updateData?.description}>
                         <TextArea
                             id="publishedDate"
                             placeholder="Mô tả dịch vụ"
@@ -100,12 +92,7 @@ const ServiceForm = ({ formType, setFormType, updateData }) => {
                             onChange={(e) => handleChangeForm('description', e.target.value)}
                         />
                     </Form.Item>
-                    <Form.Item
-                        name="genres"
-                        label="Giá dịch vụ"
-                        rules={[{ required: true }]}
-                        initialValue={updateData?.price}
-                    >
+                    <Form.Item name="genres" label="Giá dịch vụ" initialValue={updateData?.price}>
                         <Input
                             id="genres"
                             allowClear

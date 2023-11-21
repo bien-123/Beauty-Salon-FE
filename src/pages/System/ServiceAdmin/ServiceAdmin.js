@@ -106,9 +106,9 @@ const ServiceAdmin = () => {
         }
     };
 
-    // const handleSearch = () => {
-    //     fetchData();
-    // };
+    const handleSearch = () => {
+        fetchData();
+    };
 
     const showModal = (item) => {
         setDataId(item);
@@ -136,7 +136,7 @@ const ServiceAdmin = () => {
 
     useEffect(() => {
         fetchData();
-    }, [data]);
+    }, []);
     return (
         <>
             {!formType.open ? (
@@ -148,13 +148,13 @@ const ServiceAdmin = () => {
                                 className="px-3 py-2 bg-[#fff] w-[500px]"
                                 onChange={(e) => setSearch(e.target.value)}
                             ></input>
-                            {/* <button
+                            <button
                                 type="submit"
                                 className="p-2 bg-[#FC553D] text-white font-bold"
                                 onClick={handleSearch}
                             >
                                 Tìm kiếm
-                            </button> */}
+                            </button>
                         </div>
                         <Space wrap size="large">
                             <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
@@ -167,10 +167,15 @@ const ServiceAdmin = () => {
                     </div>
                 </>
             ) : (
-                <ServiceForm formType={formType} setFormType={setFormType} updateData={updateData} />
+                <ServiceForm
+                    formType={formType}
+                    setFormType={setFormType}
+                    updateData={updateData}
+                    fetchData={fetchData}
+                />
             )}
             <Modal
-                title="Xóa vi phạm"
+                title="Xóa dịch vụ"
                 open={isModalOpen}
                 onOk={handleDeleteData}
                 onCancel={handleCancel}
