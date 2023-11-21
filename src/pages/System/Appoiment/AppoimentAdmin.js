@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Table, Button, Modal, notification } from 'antd';
+import { Space, Table, Button, Modal, notification, Select } from 'antd';
+// const dayjs = require('dayjs');
+// const utc = require('dayjs/plugin/utc');
+// const timezone = require('dayjs/plugin/timezone');
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 import AppoimentServer from '../../../services/appoiment';
 import logo from '../../../assets/logo/index';
 import AppoimentForm from './AppoimentForm';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 const AppointmentAdmin = () => {
+    const { Option } = Select;
+    const formatted = (dateStr) => {
+        // const formattedDate = new Date(dateStr).toLocaleDateString('vi-VN');
+        const vnTime = dayjs.utc(dateStr).utcOffset(+7).format('HH:mm:ss YYYY-MM-DD');
+        return vnTime;
+    };
+
     const columns = [
         {
             title: 'Tên khách hàng',
@@ -18,14 +34,14 @@ const AppointmentAdmin = () => {
             title: 'Số điện thoại',
             dataIndex: 'sdt',
             key: 'sdt',
-            width: 100,
+            width: 70,
             align: 'center',
         },
         {
             title: 'Ngày hẹn',
             dataIndex: 'ngayHen',
             key: 'ngayHen',
-            width: 70,
+            width: 50,
             align: 'center',
         },
         {
@@ -39,8 +55,18 @@ const AppointmentAdmin = () => {
             title: 'Tình trạng',
             key: 'tinhTrangHienTai',
             dataIndex: 'tinhTrangHienTai',
-            width: 150,
+            width: 200,
             align: 'center',
+        },
+        {
+            title: 'Ngày đăng ký',
+            key: 'createdAt',
+            dataIndex: 'createdAt',
+            width: 100,
+            align: 'center',
+            render: (text) => {
+                return <span>{formatted(text)}</span>;
+            },
         },
         {
             title: 'Trạng thái',
@@ -130,9 +156,21 @@ const AppointmentAdmin = () => {
                     message: 'Data deleted successfully',
                 });
                 setIsModalOpen(false);
+                fetchData();
             }
         } catch (err) {
             throw new Error(err);
+        }
+    };
+
+    const handleFormChange = async (e) => {
+        try {
+            const res = await AppoimentServer.searchAppoiment(`?q=${e}`);
+            if (res) {
+                setData(res?.data);
+            }
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -145,19 +183,34 @@ const AppointmentAdmin = () => {
             {!formType.open ? (
                 <>
                     <div className="flex justify-between mb-2">
-                        <div>
-                            <input
-                                placeholder="Nhập giá trị tìm kiếm (để trống sẽ tìm kiếm tất cả)"
-                                className="px-3 py-2 bg-[#fff] w-[500px]"
-                                onChange={(e) => setSearch(e.target.value)}
-                            ></input>
-                            <button
-                                type="submit"
-                                className="p-2 bg-[#FC553D] text-white font-bold"
-                                onClick={handleSearch}
+                        <div className="flex gap-2">
+                            <div>
+                                <input
+                                    placeholder="Nhập giá trị tìm kiếm (để trống sẽ tìm kiếm tất cả)"
+                                    className="px-3 py-2 bg-[#fff] w-[500px]"
+                                    onChange={(e) => setSearch(e.target.value)}
+                                ></input>
+                                <button
+                                    type="submit"
+                                    className="p-2 bg-[#FC553D] text-white font-bold"
+                                    onClick={handleSearch}
+                                >
+                                    Tìm kiếm
+                                </button>
+                            </div>
+                            <Select
+                                placeholder="Nhập trạng thái của lịch hẹn"
+                                defaultValue="Tất cả"
+                                style={{
+                                    width: 120,
+                                    height: 36,
+                                }}
+                                onChange={(e) => handleFormChange(e)}
                             >
-                                Tìm kiếm
-                            </button>
+                                <Option value="">Tất cả</Option>
+                                <Option value="Đã xác nhận">Đã xác nhận</Option>
+                                <Option value="Chưa xác nhận">Chưa xác nhận</Option>
+                            </Select>
                         </div>
                         <Space wrap size="large">
                             <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
