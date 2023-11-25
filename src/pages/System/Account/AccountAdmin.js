@@ -3,9 +3,9 @@ import { Space, Table, Button, Modal, notification } from 'antd';
 
 import StaffServer from '../../../services/staff';
 import logo from '../../../assets/logo/index';
-import StaffForm from './StaffForm';
+import AccountForm from './AccountForm';
 
-const StaffAdmin = () => {
+const AccountAdmin = () => {
     const columns = [
         {
             title: 'Mã nhân viên',
@@ -13,56 +13,19 @@ const StaffAdmin = () => {
             key: 'maNV',
             width: 70,
             align: 'center',
-            fixed: 'left',
         },
         {
-            title: 'Họ và tên',
-            dataIndex: 'hoTen',
-            key: 'hoTen',
-            width: 100,
-            align: 'center',
-            fixed: 'left',
-        },
-        {
-            title: 'Ngày sinh',
-            dataIndex: 'ngaySinh',
-            key: 'ngaySinh',
-            width: 70,
-            align: 'center',
-        },
-        {
-            title: 'Giới tính',
-            key: 'gioiTinh',
-            dataIndex: 'gioiTinh',
-            width: 50,
-            align: 'center',
-        },
-        {
-            title: 'Chức vụ',
-            key: 'chucVu',
-            dataIndex: 'chucVu',
-            width: 60,
-            align: 'center',
-        },
-        {
-            title: 'Số điện thoại',
-            key: 'soDienThoai',
-            dataIndex: 'soDienThoai',
-            width: 70,
-            align: 'center',
-        },
-        {
-            title: 'Email',
-            key: 'email',
-            dataIndex: 'email',
-            width: 150,
-            align: 'center',
-        },
-        {
-            title: 'Địa chỉ',
-            key: 'diaChi',
-            dataIndex: 'diaChi',
+            title: 'Mật khẩu',
+            dataIndex: 'password',
+            key: 'password',
             width: 200,
+            align: 'center',
+        },
+        {
+            title: 'Phân quyền',
+            dataIndex: 'phanQuyen',
+            key: 'phanQuyen',
+            width: 70,
             align: 'center',
         },
         {
@@ -86,7 +49,6 @@ const StaffAdmin = () => {
             ),
             width: 50,
             align: 'center',
-            fixed: 'right',
         },
     ];
 
@@ -107,7 +69,7 @@ const StaffAdmin = () => {
 
     const fetchData = async () => {
         try {
-            const res = await StaffServer.searchStaff(`?q=${search}`);
+            const res = await StaffServer.searchAccount(`?q=${search}`);
             if (res) {
                 setData(res?.data?.arrResult);
             }
@@ -119,10 +81,13 @@ const StaffAdmin = () => {
     const handleSearch = () => {
         fetchData();
     };
+    const resetForm = () => {
+        setSearch('');
+    };
 
     const handleAddNewForm = () => {
-        setFormType({ open: true, type: FORM_TYPE.CREATED });
-        setUpdateData(null);
+        resetForm();
+        fetchData();
     };
 
     const handleUpdateForm = (item) => {
@@ -181,7 +146,7 @@ const StaffAdmin = () => {
                         </div>
                         <Space wrap size="large">
                             <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
-                                Thêm mới
+                                Reset
                             </Button>
                         </Space>
                     </div>
@@ -190,7 +155,7 @@ const StaffAdmin = () => {
                     </div>
                 </>
             ) : (
-                <StaffForm
+                <AccountForm
                     formType={formType}
                     setFormType={setFormType}
                     updateData={updateData}
@@ -228,4 +193,4 @@ const StaffAdmin = () => {
     );
 };
 
-export default StaffAdmin;
+export default AccountAdmin;
