@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BellFilled } from '@ant-design/icons';
 import { Avatar, Breadcrumb, Button, Popover, Layout } from 'antd';
 import { useNavigate, useLocation } from 'react-router';
@@ -7,6 +7,8 @@ import { useMemo } from 'react';
 import { getDataLocalStorage, removeLocalStorage } from '../../auth';
 import { Link } from 'react-router-dom';
 import config from '../../../config';
+
+import ModalChangePassword from '../Account/ModalChangePassword';
 const { Header } = Layout;
 
 const listBreadCrumbDefault = [
@@ -80,6 +82,17 @@ const HeaderAdmin = () => {
         removeLocalStorage();
     };
 
+    const [showModal, setShowModal] = useState(false);
+
+    const handleOpenModal = () => {
+        setShowModal(true); // Khi click vào "Logout", hiển thị modal
+        // Ngoài ra, bạn có thể thực hiện các logic khác ở đây, như gọi API để logout, xoá dữ liệu local, vv.
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); // Đóng modal khi cần
+    };
+
     return (
         <Header className="bg-white px-5 flex items-center justify-between">
             <div>
@@ -98,6 +111,9 @@ const HeaderAdmin = () => {
                             <Link to={config.routes.home}>
                                 <Button className="w-full mb-2">Trang chủ</Button>
                             </Link>
+                            <Button onClick={handleOpenModal} className="w-full mb-2">
+                                Đổi mật khẩu
+                            </Button>
                             <Button onClick={handleLogOut} className="w-full">
                                 Logout
                             </Button>
@@ -110,11 +126,12 @@ const HeaderAdmin = () => {
                         </div>
                     }
                     trigger="click"
-                    //   open={open}
-                    //   onOpenChange={handleOpenChange}
                 >
                     <p className="cursor-pointer text-lg font-bold border-none p-2">...</p>
                 </Popover>
+                {showModal && (
+                    <ModalChangePassword open={showModal} handleClose={handleCloseModal} maNV={dataUser?.maNV} />
+                )}
             </div>
         </Header>
     );

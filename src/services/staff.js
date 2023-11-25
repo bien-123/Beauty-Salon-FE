@@ -34,9 +34,9 @@ const StaffServer = {
         }
     },
 
-    async updateAccount(id, formData) {
+    async updateAccount(maNV, formData) {
         try {
-            const res = await axios.put(`${API_STAFF_PAGE}/updateAccount${id}`, formData);
+            const res = await axios.put(`${API_STAFF_PAGE}/updatePassword/${maNV}`, formData);
             return res;
         } catch (err) {
             throw new Error(err);
