@@ -1,4 +1,3 @@
-import DangKyTuVan from '../../../assets/logo/Dang-ky-copy-3.png';
 import IconPhone from '../../../assets/icons/phone-header.png';
 import ModalHeader from './ModalHeader';
 import { useState } from 'react';
@@ -7,9 +6,6 @@ import config from '../../../config';
 import logo from '../../../assets/logo/index';
 const Header = () => {
     const [open, setOpen] = useState(false);
-    const handleOpen = (value) => {
-        setOpen(true);
-    };
     const handleClose = () => setOpen(false);
     return (
         <>
