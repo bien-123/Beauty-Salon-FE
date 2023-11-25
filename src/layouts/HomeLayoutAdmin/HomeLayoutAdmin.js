@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticated } from '../../auth.js';
+import { isAuthenticated } from '../../constans/auth.js';
 import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 

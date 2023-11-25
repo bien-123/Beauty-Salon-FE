@@ -1,7 +1,7 @@
 import config from '../config';
 
 // file này dùng để định nghĩa các Router trong pages
-import Home from '../pages/User/HomeLayout/HomeLayout.js';
+import Home from '../pages/User/Home/HomeLayout.js';
 import Contact from '../pages/User/Contact';
 import Introduce from '../pages/User/Introduce';
 import Result from '../pages/User/Result';
@@ -9,6 +9,7 @@ import Service from '../pages/User/Service';
 import Payment from '../pages/User/Policy/Payment.js';
 import Privacy from '../pages/User/Policy/Privacy.js';
 import Login from '../pages/Login.js';
+
 import HomeAdmin from '../pages/System/Home/HomeAdmin.js';
 import CustomerAdmin from '../pages/System/Customer/CustomerAdmin.js';
 import ServiceAdmin from '../pages/System/ServiceAdmin/ServiceAdmin.js';
@@ -26,7 +27,7 @@ const publicRoutes = [
     { path: config.routes.service, component: Service },
     { path: config.routes.payment, component: Payment },
     { path: config.routes.privacy, component: Privacy },
-    { path: config.routes.login, component: Login },
+    { path: config.routes.login, component: Login, layout: null },
 ];
 
 // dùng cho Router phải đăng nhập mới vào đc

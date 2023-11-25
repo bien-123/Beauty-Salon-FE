@@ -3,12 +3,11 @@ import { BellFilled } from '@ant-design/icons';
 import { Avatar, Breadcrumb, Button, Popover, Layout } from 'antd';
 import { useNavigate, useLocation } from 'react-router';
 import { useMemo } from 'react';
-
-import { getDataLocalStorage, removeLocalStorage } from '../../auth';
 import { Link } from 'react-router-dom';
-import config from '../../../config';
 
-import ModalChangePassword from '../Account/ModalChangePassword';
+import { getDataLocalStorage, removeLocalStorage } from '../../constans/auth';
+import config from '../../config';
+import ModalChangePassword from '../../pages/System/Account/ModalChangePassword';
 const { Header } = Layout;
 
 const listBreadCrumbDefault = [

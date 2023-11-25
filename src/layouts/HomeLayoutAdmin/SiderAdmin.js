@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 
-import logo from '../../../assets/logo/index.jsx';
+import logo from '../../assets/logo/index.jsx';
 import MenuAdmin from './MenuAdmin.js';
 
 const { Sider } = Layout;
