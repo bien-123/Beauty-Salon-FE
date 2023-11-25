@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from './routes';
 import { Fragment } from 'react';
 
-import HomeLayoutAdmin from './pages/System/HomeLayoutAdmin/HomeLayoutAdmin';
+import HomeLayoutUser from './layouts/HomeLayoutUser/HomeLayoutUser';
+import HomeLayoutAdmin from './layouts/HomeLayoutAdmin/HomeLayoutAdmin';
 
 function App() {
     return (
@@ -11,15 +12,26 @@ function App() {
             <div className="App">
                 <Routes>
                     {publicRoutes.map((route, index) => {
+                        let Layout = HomeLayoutUser; //set Layout = DefaultLayout
+
+                        // nếu có layout thì đặt là layout
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            // nếu Layout bằng null thì Layout = Fragment(ko có Layout)
+                            Layout = Fragment;
+                        } // còn lại là LayoutDefault
                         const Page = route.component;
                         return (
                             <Route
                                 key={index}
                                 path={route.path}
                                 element={
-                                    // <HomeLayout>
-                                    <Page />
-                                    // </HomeLayout>
+                                    <Fragment>
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    </Fragment>
                                 }
                             />
                         );

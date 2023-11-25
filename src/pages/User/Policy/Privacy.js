@@ -1,10 +1,6 @@
-import Header from '../../../layouts/component/Header/HeaderLayout';
-import FormInput from '../../../layouts/component/FormInput';
-import Footer from '../../../layouts/component/FooterLayout';
 const Privacy = () => {
     return (
         <>
-            <Header />
             <div className="w-[1050px] m-auto flex flex-col items-start justify-start py-8 gap-2 text-start">
                 <div className="hr-underline">
                     <div className="text-2xl text-[#02a7aa] font-bold mb-2">Chính sách bảo vệ thông tin cá nhân</div>
@@ -129,8 +125,6 @@ const Privacy = () => {
                 <div className="font-bold text-base">Địa chỉ:</div>
                 <li className="list-disc ml-9 gap-2 text-base">TP. Hà Nội: Thị Trấn Xuân Mai, Huyện Chương Mỹ</li>
             </div>
-            <FormInput />
-            <Footer />
         </>
     );
 };

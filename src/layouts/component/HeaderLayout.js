@@ -1,12 +1,8 @@
-import IconPhone from '../../../assets/icons/phone-header.png';
-import ModalHeader from './ModalHeader';
-import { useState } from 'react';
+import IconPhone from '../../assets/icons/phone-header.png';
 import { Link } from 'react-router-dom';
-import config from '../../../config';
-import logo from '../../../assets/logo/index';
+import config from '../../config';
+import logo from '../../assets/logo/index';
 const Header = () => {
-    const [open, setOpen] = useState(false);
-    const handleClose = () => setOpen(false);
     return (
         <>
             <div className="bg-[#EEEEEE]">
@@ -35,12 +31,8 @@ const Header = () => {
                             </a>
                         </div>
                     </div>
-                    {/* <p onClick={() => handleOpen()}>
-                        <img src={DangKyTuVan} alt="Đăng ký tư vấn" className="cursor-pointer"></img>
-                    </p> */}
                 </div>
             </div>
-            {open && <ModalHeader open={open} handleClose={handleClose} />}
         </>
     );
 };

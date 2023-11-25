@@ -1,6 +1,3 @@
-import Header from '../../../layouts/component/Header/HeaderLayout';
-import FormInput from '../../../layouts/component/FormInput';
-import Footer from '../../../layouts/component/FooterLayout';
 import logo from '../../../assets/logo/index';
 import { toaster } from 'evergreen-ui';
 const Payment = () => {
@@ -11,7 +8,6 @@ const Payment = () => {
     };
     return (
         <>
-            <Header />
             <div className="w-[1050px] m-auto flex flex-col items-start justify-start py-8 gap-2  text-start">
                 <div className="text-2xl text-[#02a7aa] font-bold mb-2">
                     Chính sách thanh toán tại Viện Thẩm Mỹ Beauty
@@ -65,8 +61,6 @@ const Payment = () => {
                     <li className="list-disc ml-9 mt-2 text-base">Website: vienthammyBeauty.vn</li>
                 </ul>
             </div>
-            <FormInput />
-            <Footer />
         </>
     );
 };
