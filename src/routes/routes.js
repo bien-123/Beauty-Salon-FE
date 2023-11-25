@@ -15,6 +15,7 @@ import ServiceAdmin from '../pages/System/ServiceAdmin/ServiceAdmin.js';
 import AppointmentAdmin from '../pages/System/Appoiment/AppoimentAdmin.js';
 import BillAdmin from '../pages/System/Bill/BillAdmin.js';
 import StaffAdmin from '../pages/System/StaffAdmin/StaffAdmin.js';
+import AccountAdmin from '../pages/System/Account/AccountAdmin.js';
 
 // dùng cho Router ko cần đăng nhập vẫn xem đc
 const publicRoutes = [
@@ -36,6 +37,7 @@ const privateRoutes = [
     { path: config.routes.adminappointment, component: AppointmentAdmin },
     { path: config.routes.adminbill, component: BillAdmin },
     { path: config.routes.adminstaff, component: StaffAdmin },
+    { path: config.routes.adminaccount, component: AccountAdmin },
 ];
 
 export { publicRoutes, privateRoutes };

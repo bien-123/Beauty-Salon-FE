@@ -3,7 +3,8 @@ import {
     ExclamationCircleFilled,
     HomeOutlined,
     ProfileOutlined,
-    SettingOutlined,
+    PayCircleOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'antd';
@@ -23,7 +24,8 @@ const items = [
     getItem(<Link to="/admincustomer">Quản Lý Khách Hàng</Link>, '2', <CustomerServiceOutlined />),
     getItem(<Link to="/adminservices">Quản Lý Dịch Vụ</Link>, '3', <ExclamationCircleFilled />),
     getItem(<Link to="/adminappointment">Quản Lý Lịch Hẹn</Link>, '4', <ProfileOutlined />),
-    getItem(<Link to="/adminbill">Quản Lý Hóa Đơn</Link>, '5', <SettingOutlined />),
+    getItem(<Link to="/adminbill">Quản Lý Hóa Đơn</Link>, '5', <PayCircleOutlined />),
+    getItem(<Link to="/adminaccount">Quản Lý Tài Khoản</Link>, '6', <UserOutlined />),
 ];
 
 const MenuAdmin = () => {
@@ -41,6 +43,8 @@ const MenuAdmin = () => {
                 return ['4'];
             case '/breaks':
                 return ['5'];
+            case '/users':
+                return ['6'];
             default:
                 return ['1'];
         }
