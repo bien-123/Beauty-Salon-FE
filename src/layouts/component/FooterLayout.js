@@ -1,6 +1,8 @@
 import IconFB from '../../assets/icons/icon-fb.png';
 import IconPhone from '../../assets/icons/icon-phone-1.png';
 import IconTikTok from '../../assets/icons/icon-tt.png';
+import IconZalo from '../../assets/icons/IconZalo.svg';
+import IconMess from '../../assets/icons/IconMessenger.svg';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import logo from '../../assets/logo/index';
@@ -35,10 +37,12 @@ const Footer = () => {
                             />
                         </Link>
                         <div className="flex gap-2 border-2 border-solid border-[#01babd] w-[150px] rounded-[50px] !my-4">
-                            <div className="flex px-3 py-2">
-                                <img src={IconPhone} alt="Icon Phone" />
-                                <div className="px-2 text-[#000] font-bold">098.765.4321</div>
-                            </div>
+                            <a href="tel:0971035861">
+                                <div className="flex px-3 py-2">
+                                    <img src={IconPhone} alt="Icon Phone" />
+                                    <div className="px-2 text-[#000] font-bold">097.103.5861</div>
+                                </div>
+                            </a>
                         </div>
                         <div className="flex gap-2 mb-4">
                             <a href="tel:0987654321">
@@ -86,6 +90,19 @@ const Footer = () => {
                             referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
                     </div>
+                </div>
+            </div>
+            <div>
+                <a href="tel:0971035861" class="phone-wrapper" aria-label="Gọi với tư vấn viên">
+                    097.103.5861
+                </a>
+                <div className="fixed bottom-7 right-7">
+                    <a href="https://m.me/7003156739766071">
+                        <img src={IconMess} alt="Icon Mess" className="w-[50px] h-[50px] mb-2"></img>
+                    </a>
+                    <a href="https://zalo.me/0971035861">
+                        <img src={IconZalo} alt="Icon Zalo" className="w-12 h-12"></img>
+                    </a>
                 </div>
             </div>
         </>

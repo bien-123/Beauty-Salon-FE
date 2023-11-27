@@ -127,3 +127,20 @@ table td {
     justify-content: center;
     margin-top: 20%;
 }
+
+.phone-wrapper {
+    position: fixed;
+    display: flex;
+    margin-left: 2%;
+    margin-bottom: 1%;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #fff;
+    z-index: 999;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px;
+    background: linear-gradient(97deg, #ea3d47 1.07%, #fe8059 99.68%);
+    border-radius: 50px;
+    font-size: 18px;
+}

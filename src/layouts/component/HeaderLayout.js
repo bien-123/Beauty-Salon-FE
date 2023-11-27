@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <>
             <div className="bg-[#EEEEEE]">
-                <div className="flex max-w-[1280px] h-[70px] m-auto justify-between items-center tran_header">
+                <div className="flex max-w-[1280px] h-[70px] m-auto justify-between items-center tran_header main-navigation">
                     <Link to={config.routes.home}>
                         <img src={logo.LogoMain} alt="Logo Main" className="w-[60px] h-[60px] rounded-[50px]" />
                     </Link>

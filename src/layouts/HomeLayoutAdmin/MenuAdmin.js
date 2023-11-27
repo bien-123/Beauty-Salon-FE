@@ -33,17 +33,17 @@ const MenuAdmin = () => {
 
     const selectedMenuKey = useMemo(() => {
         switch (location.pathname) {
-            case '/':
+            case '/adminstaff':
                 return ['1'];
-            case '/logs':
+            case '/admincustomer':
                 return ['2'];
-            case '/break':
+            case '/adminservices':
                 return ['3'];
-            case '/log':
+            case '/adminappointment':
                 return ['4'];
-            case '/breaks':
+            case '/adminbill':
                 return ['5'];
-            case '/users':
+            case '/adminaccount':
                 return ['6'];
             default:
                 return ['1'];
