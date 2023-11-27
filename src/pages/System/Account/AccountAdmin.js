@@ -81,13 +81,17 @@ const AccountAdmin = () => {
     const handleSearch = () => {
         fetchData();
     };
-    const resetForm = () => {
-        setSearch('');
-    };
 
-    const handleAddNewForm = () => {
-        resetForm();
-        fetchData();
+    const handleResetForm = async () => {
+        try {
+            setSearch('');
+            const res = await StaffServer.searchAccount(`?q=${search}`);
+            if (res) {
+                setData(res?.data?.arrResult);
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const handleUpdateForm = (item) => {
@@ -133,6 +137,7 @@ const AccountAdmin = () => {
                                 <input
                                     placeholder="Nhập giá trị tìm kiếm (để trống sẽ tìm kiếm tất cả)"
                                     className="px-3 py-2 bg-[#fff] w-[500px]"
+                                    value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                 ></input>
                                 <button
@@ -145,7 +150,7 @@ const AccountAdmin = () => {
                             </div>
                         </div>
                         <Space wrap size="large">
-                            <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
+                            <Button className="bg-[#02a7aa] text-white" onClick={handleResetForm}>
                                 Reset
                             </Button>
                         </Space>
