@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toaster } from 'evergreen-ui';
 
 import ClientServer from '../../../services/client';
+import { isValidPhoneNumber, isEmail } from '../../../constans/shared';
 
 const CustomerForm = ({ formType, setFormType, updateData, fetchData }) => {
     const { Option } = Select;
@@ -15,6 +16,7 @@ const CustomerForm = ({ formType, setFormType, updateData, fetchData }) => {
         soDienThoai: updateData?.soDienThoai || '',
         email: updateData?.email || '',
         diaChi: updateData?.diaChi || '',
+        typeKH: updateData?.typeKH || '',
     });
 
     const handleChangeForm = (key, value) => {
@@ -33,8 +35,12 @@ const CustomerForm = ({ formType, setFormType, updateData, fetchData }) => {
             toaster.warning('Vui lòng nhập tên khách hàng!');
         } else if (!soDienThoai) {
             toaster.warning('Vui lòng nhập số điện thoại!');
+        } else if (!isValidPhoneNumber(soDienThoai)) {
+            toaster.warning('Vui lòng nhập đúng định dạng số điện thoại!');
         } else if (!email) {
             toaster.warning('Vui lòng nhập email!');
+        } else if (!isEmail(email)) {
+            toaster.warning('Vui lòng nhập đúng định dạng email!');
         } else if (formType.type === 'created' && updateData === null) {
             try {
                 const res = await ClientServer.addClient({ ...formData });
@@ -126,6 +132,12 @@ const CustomerForm = ({ formType, setFormType, updateData, fetchData }) => {
                             placeholder="Nhập thông tin địa chỉ"
                             onChange={(e) => handleChangeForm('diaChi', e.target.value)}
                         ></Input>
+                    </Form.Item>
+                    <Form.Item name="typeKH" label="Kiểu khách hàng" initialValue={updateData?.typeKH}>
+                        <Select placeholder="Chọn kiểu khách hàng" onChange={(e) => handleChangeForm('typeKH', e)}>
+                            <Option value="Khách bình thường">Khách bình thường</Option>
+                            <Option value="Khách VIP">Khách VIP</Option>
+                        </Select>
                     </Form.Item>
                 </div>
             </Form>

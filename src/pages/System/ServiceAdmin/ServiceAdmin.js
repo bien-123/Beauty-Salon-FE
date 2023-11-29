@@ -4,6 +4,7 @@ import { Space, Table, Button, Modal, notification } from 'antd';
 import ServicesServer from '../../../services/services';
 import logo from '../../../assets/logo/index';
 import ServiceForm from './ServiceForm';
+import { formatNumber } from '../../../constans/shared';
 
 const ServiceAdmin = () => {
     const columns = [
@@ -11,7 +12,7 @@ const ServiceAdmin = () => {
             title: 'Mã dịch vụ',
             dataIndex: 'maDV',
             key: 'maDV',
-            render: (text) => <a>{text}</a>,
+            render: (text) => <>{text}</>,
             width: 60,
             align: 'center',
         },
@@ -19,7 +20,7 @@ const ServiceAdmin = () => {
             title: 'Tên dịch vụ',
             dataIndex: 'name',
             key: 'name',
-            render: (text) => <a>{text}</a>,
+            render: (text) => <>{text}</>,
             width: 100,
             align: 'center',
         },
@@ -35,6 +36,7 @@ const ServiceAdmin = () => {
             dataIndex: 'price',
             key: 'price',
             width: 70,
+            render: (text) => <>{formatNumber(Number(text))} VNĐ</>,
             align: 'center',
         },
         {

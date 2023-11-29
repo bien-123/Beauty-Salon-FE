@@ -52,6 +52,11 @@ const Payment = () => {
                 >
                     Sao chép thông tin TK MBBank
                 </button>
+                <p className="italic text-[#CD1818]">
+                    * Lưu ý: Quý khách lưu ý khi thanh toán vui lòng ghi rõ nội dung: Họ Tên - Nội dung chuyển khoản
+                </p>
+                <p>VD: Nguyễn Thu Hà - Chuyển khoản tiền thẩm mỹ</p>
+
                 <div className="font-bold text-xl">Thông tin liên hệ:</div>
                 <ul>
                     <li className="list-disc ml-9 mt-2 text-base">

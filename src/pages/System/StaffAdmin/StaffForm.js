@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { toaster } from 'evergreen-ui';
 
 import StaffServer from '../../../services/staff';
+import { isValidPhoneNumber, isEmail } from '../../../constans/shared';
 
 const { Option } = Select;
 
@@ -42,8 +43,12 @@ const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
             toaster.warning('Vui lòng nhập chức vụ!');
         } else if (!soDienThoai) {
             toaster.warning('Vui lòng nhập số điện thoại!');
+        } else if (!isValidPhoneNumber(soDienThoai)) {
+            toaster.warning('Vui lòng nhập đúng định dạng số điện thoại!');
         } else if (!email) {
             toaster.warning('Vui lòng nhập email!');
+        } else if (!isEmail(email)) {
+            toaster.warning('Vui lòng nhập đúng định dạng email!');
         } else if (!diaChi) {
             toaster.warning('Vui lòng nhập địa chỉ!');
             return;

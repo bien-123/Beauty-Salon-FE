@@ -7,3 +7,5 @@ export const API_APPOIMENT_PAGE = `${API_ENDPOINT_PUBLIC}/appointment`;
 export const API_SERVICES_PAGE = `${API_ENDPOINT_PUBLIC}/service`;
 
 export const API_CLIENT_PAGE = `${API_ENDPOINT_PUBLIC}/client`;
+
+export const API_BILL_PAGE = `${API_ENDPOINT_PUBLIC}/bill`;

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import ServicesServer from '../../../services/services';
 import logo from '../../../assets/logo/index';
+import { formatNumber } from '../../../constans/shared';
 
 const Content = () => {
     const headerTableTitle = ['Mã Dịch Vụ', 'Tên Dịch Vụ', 'Mô tả', 'Giá Dịch vụ', 'Thời gian'];
@@ -59,7 +61,7 @@ const Content = () => {
                                     <td>{item?.maDV}</td>
                                     <td>{item?.name}</td>
                                     <td>{item?.description}</td>
-                                    <td>{item?.price}</td>
+                                    <td>{formatNumber(Number(item.price))} VNĐ</td>
                                     <td>{item?.time}</td>
                                 </tr>
                             ))}

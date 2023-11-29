@@ -4,6 +4,7 @@ import { toaster } from 'evergreen-ui';
 import dayjs from 'dayjs';
 
 import AppoimentServer from '../../../services/appoiment';
+import { isValidPhoneNumber } from '../../../constans/shared';
 
 const { Option } = Select;
 
@@ -31,6 +32,9 @@ const AppoimentForm = ({ formType, setFormType, updateData, fetchData }) => {
             return;
         } else if (!sdt) {
             toaster.warning('Vui lòng nhập số điện thoại!');
+            return;
+        } else if (!isValidPhoneNumber(sdt)) {
+            toaster.warning('Vui lòng nhập đúng định dạng số điện thoại!');
             return;
         } else if (!ngayHen) {
             toaster.warning('Vui lòng chọn ngày hẹn!');
