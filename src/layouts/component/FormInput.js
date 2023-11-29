@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+import { isValidPhoneNumber } from '../../constans/shared';
 import AppoimentServer from '../../services/appoiment';
 import { toaster } from 'evergreen-ui';
 
@@ -38,6 +40,8 @@ const FormInput = () => {
             toaster.warning('Vui lòng nhập họ tên!');
         } else if (!addAppoiment.sdt) {
             toaster.warning('Vui lòng nhập số điện thoại!');
+        } else if (!isValidPhoneNumber(addAppoiment.sdt)) {
+            toaster.warning('Vui lòng nhập đúng định dạng số điện thoại!');
         } else if (!addAppoiment.ngayHen) {
             toaster.warning('Vui lòng nhập ngày hẹn!');
         } else if (!addAppoiment.gioHen) {

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Space, Table, Button, Modal, notification, Select } from 'antd';
-// const dayjs = require('dayjs');
-// const utc = require('dayjs/plugin/utc');
-// const timezone = require('dayjs/plugin/timezone');
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';

@@ -98,6 +98,7 @@ const ServiceForm = ({ formType, setFormType, updateData, fetchData }) => {
                             allowClear
                             placeholder="Nhập thông tin giá dịch vụ"
                             onChange={(e) => handleChangeForm('price', e.target.value)}
+                            suffix="VNĐ"
                         ></Input>
                     </Form.Item>
                     <Form.Item name="status" label="Thời gian thực hiện" initialValue={updateData?.time}>
