@@ -74,8 +74,8 @@ const AccountForm = ({ formType, setFormType, updateData, fetchData }) => {
                     </Form.Item>
                     <Form.Item name="phanQuyen" label="Phân quyền" initialValue={updateData?.phanQuyen}>
                         <Select placeholder="Chọn phân quyền" onChange={(e) => handleFormChange('phanQuyen', e)}>
-                            <Option value="Admin">Admin</Option>
-                            <Option value="User">User</Option>
+                            <Option value="ADMIN">ADMIN</Option>
+                            <Option value="USER">USER</Option>
                         </Select>
                     </Form.Item>
                 </div>

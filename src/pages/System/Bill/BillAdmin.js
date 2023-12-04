@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Table, Button, Modal, notification } from 'antd';
+import { Space, Table, Button, Modal, notification, Tag } from 'antd';
 import dayjs from 'dayjs';
 
 import BillServer from '../../../services/bill';
@@ -32,7 +32,7 @@ const BillAdmin = () => {
             dataIndex: 'tenKH',
             key: 'tenKH',
             render: (text) => <>{text}</>,
-            width: 150,
+            width: 100,
             align: 'center',
         },
         {
@@ -41,6 +41,21 @@ const BillAdmin = () => {
             key: 'maDV',
             width: 150,
             align: 'center',
+            render: (_, { maDV }) => (
+                <>
+                    {maDV.map((tag) => {
+                        let color = tag.length > 5 ? 'geekblue' : 'green';
+                        if (tag === 'loser') {
+                            color = 'volcano';
+                        }
+                        return (
+                            <Tag color={color} key={tag}>
+                                {tag.toUpperCase()}
+                            </Tag>
+                        );
+                    })}
+                </>
+            ),
         },
         {
             title: 'Tên DV',
@@ -63,6 +78,13 @@ const BillAdmin = () => {
             dataIndex: 'sale',
             width: 70,
             align: 'center',
+            render: (text) => {
+                if (text > 1) {
+                    return <>{formatNumber(Number(text))} VNĐ</>;
+                } else {
+                    return <span>{text}</span>;
+                }
+            },
         },
         {
             title: 'Tổng tiền',
@@ -231,7 +253,7 @@ const BillAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 2000, y: 300 }} />;
+                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 3000, y: 300 }} />;
                     </div>
                 </>
             ) : (

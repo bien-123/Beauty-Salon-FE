@@ -26,6 +26,7 @@ const AppointmentAdmin = () => {
             key: 'tenKHtenKH',
             width: 100,
             align: 'center',
+            fixed: 'left',
         },
         {
             title: 'Số điện thoại',
@@ -33,12 +34,13 @@ const AppointmentAdmin = () => {
             key: 'sdt',
             width: 70,
             align: 'center',
+            fixed: 'left',
         },
         {
             title: 'Ngày hẹn',
             dataIndex: 'ngayHen',
             key: 'ngayHen',
-            width: 50,
+            width: 70,
             align: 'center',
         },
         {
@@ -73,6 +75,13 @@ const AppointmentAdmin = () => {
             align: 'center',
         },
         {
+            title: 'Kết quả',
+            key: 'result',
+            dataIndex: 'result',
+            width: 100,
+            align: 'center',
+        },
+        {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
@@ -93,6 +102,7 @@ const AppointmentAdmin = () => {
             ),
             width: 50,
             align: 'center',
+            fixed: 'right',
         },
     ];
 
@@ -199,7 +209,7 @@ const AppointmentAdmin = () => {
                                 placeholder="Nhập trạng thái của lịch hẹn"
                                 defaultValue="Tất cả"
                                 style={{
-                                    width: 120,
+                                    width: 140,
                                     height: 36,
                                 }}
                                 onChange={(e) => handleFormChange(e)}
@@ -207,6 +217,8 @@ const AppointmentAdmin = () => {
                                 <Option value="">Tất cả</Option>
                                 <Option value="Đã xác nhận">Đã xác nhận</Option>
                                 <Option value="Chưa xác nhận">Chưa xác nhận</Option>
+                                <Option value="Thành công">Thành công</Option>
+                                <Option value="Thất bại">Thất bại</Option>
                             </Select>
                         </div>
                         <Space wrap size="large">
@@ -216,7 +228,7 @@ const AppointmentAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ y: 490 }} />;
+                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 2000, y: 300 }} />
                     </div>
                 </>
             ) : (
