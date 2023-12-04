@@ -16,6 +16,7 @@ const AppoimentForm = ({ formType, setFormType, updateData, fetchData }) => {
         gioHen: updateData?.gioHen || '',
         tinhTrangHienTai: updateData?.tinhTrangHienTai || '',
         status: updateData?.status || '',
+        result: updateData?.result || '',
     });
 
     const handleClose = () => {
@@ -134,6 +135,15 @@ const AppoimentForm = ({ formType, setFormType, updateData, fetchData }) => {
                         >
                             <Option value="Đã xác nhận">Đã xác nhận</Option>
                             <Option value="Chưa xác nhận">Chưa xác nhận</Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="result" label="Kết quả" initialValue={updateData?.result}>
+                        <Select
+                            placeholder="Nhập kết quả của lịch hẹn sau khi tư vấn"
+                            onChange={(e) => handleFormChange('result', e)}
+                        >
+                            <Option value="Thành công">Thành công</Option>
+                            <Option value="Thất bại">Thất bại</Option>
                         </Select>
                     </Form.Item>
                 </div>

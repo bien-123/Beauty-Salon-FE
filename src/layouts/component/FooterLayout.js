@@ -57,7 +57,7 @@ const Footer = () => {
                                 to={login ? config.routes.admin : config.routes.login}
                                 className="text-[#000] font-bold"
                             >
-                                Đăng nhập
+                                {login ? 'Trang quản trị' : 'Đăng nhập'}
                             </Link>
                         </div>
                         <div className="flex gap-2">
@@ -82,6 +82,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <iframe
+                            title="Bản đồ địa lý"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3727.027993514735!2d105.57408767499749!3d20.911193391806687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134456c69afbb4d%3A0xaa4e3f4c05b31119!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBMw6JtIG5naGnhu4dwIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1699370514377!5m2!1svi!2s"
                             width="100%"
                             height="300"
@@ -93,7 +94,7 @@ const Footer = () => {
                 </div>
             </div>
             <div>
-                <a href="tel:0971035861" class="phone-wrapper" aria-label="Gọi với tư vấn viên">
+                <a href="tel:0971035861" className="phone-wrapper" aria-label="Gọi với tư vấn viên">
                     097.103.5861
                 </a>
                 <div className="fixed bottom-7 right-7">
