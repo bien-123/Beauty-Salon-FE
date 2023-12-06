@@ -36,6 +36,14 @@ const BillAdmin = () => {
             align: 'center',
         },
         {
+            title: 'Loại khách hàng',
+            dataIndex: 'loaiKH',
+            key: 'loaiKH',
+            render: (text) => <>{text}</>,
+            width: 70,
+            align: 'center',
+        },
+        {
             title: 'Mã DV',
             dataIndex: 'maDV',
             key: 'maDV',
@@ -79,10 +87,10 @@ const BillAdmin = () => {
             width: 70,
             align: 'center',
             render: (text) => {
-                if (text > 1) {
+                if (text > 100) {
                     return <>{formatNumber(Number(text))} VNĐ</>;
                 } else {
-                    return <span>{text}</span>;
+                    return <span>{text} %</span>;
                 }
             },
         },

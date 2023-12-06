@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, Select } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
 import { toaster } from 'evergreen-ui';
+import TextArea from 'antd/es/input/TextArea';
+
 import BillServer from '../../../services/bill';
 import { getDataLocalStorage } from '../../../constans/auth';
 import ServicesServer from '../../../services/services';
+import { formatNumber } from '../../../constans/shared';
+import ClientServer from '../../../services/client';
 
 const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
+    const [form] = Form.useForm();
     const { Option } = Select;
     const dataUser = getDataLocalStorage();
     const [formData, setFormData] = useState({
         maKH: updateData?.maKH || '',
         tenKH: updateData?.tenKH || '',
+        loaiKH: updateData?.loaiKH || '',
         maDV: updateData?.maDV || '',
         tenDV: updateData?.tenDV || '',
         gia: updateData?.gia || '',
@@ -19,45 +24,23 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
         tongTien: updateData?.tongTien || '',
         phuongThuc: updateData?.phuongThuc || '',
         ghiChu: updateData?.ghiChu || '',
-        maNV: dataUser?.maNV || '', // Ensure maNV has a default value
+        maNV: dataUser?.maNV || '',
     });
+    const [dataService, setDataService] = useState([]);
+    const [customer, setCustomer] = useState([]);
+    const [selectedService, setSelectedService] = useState('');
 
     const handleChangeForm = (key, value) => {
         setFormData((prevState) => ({
             ...prevState,
             [key]: value,
         }));
-
-        if (key === 'maDV') {
-            const selectedService = dataService.find((service) => service.maDV === value);
-            if (selectedService) {
-                setFormData((prevState) => ({
-                    ...prevState,
-                    tenDV: selectedService.name, // Update the tenDV field with the corresponding service name
-                }));
-            }
-        }
-
-        const gia = parseFloat(key === 'gia' ? value : formData.gia || 0);
-        const sale = parseFloat(key === 'sale' ? value : formData.sale || 0);
-        let tongTien;
-
-        if (sale < 100) {
-            tongTien = gia - (gia * sale) / 100;
-        } else {
-            tongTien = gia - sale;
-        }
-
-        setFormData((prevState) => ({
-            ...prevState,
-            tongTien: tongTien.toFixed(0),
-        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { maDV, tenDV, maKH, tenKH, gia } = formData;
-        if (!maDV || !tenDV || !maKH || !tenKH || !gia) {
+        const { maDV, maKH, tenKH, gia, sale } = formData;
+        if (!maDV || !maKH || !tenKH || !gia || !sale) {
             toaster.warning('Vui lòng nhập đầy đủ thông tin!');
             return;
         }
@@ -93,8 +76,6 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
         setFormType({ ...formType, open: false });
     };
 
-    const [dataService, setDataService] = useState([]);
-
     const getServices = async () => {
         try {
             const res = await ServicesServer.getBill();
@@ -106,21 +87,92 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
         }
     };
 
+    const getCutomer = async () => {
+        try {
+            const res = await ClientServer.getClient();
+            if (res) {
+                setCustomer(res?.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         getServices();
+        getCutomer();
     }, []);
+
+    useEffect(() => {
+        if (formData.maDV || formData.maKH) {
+            // const service = dataService.find((service) => service.maDV === formData.maDV);
+            // khách hàng
+            const tenKHArray = customer.filter((cs) => formData.maKH.includes(cs.maKH));
+            form.setFieldValue('tenKH', tenKHArray[0]?.hoTen);
+
+            const typeKH = tenKHArray[0]?.typeKH;
+            form.setFieldValue('loaiKH', typeKH);
+
+            // dịch vụ
+            const filteredServices = dataService.filter((service) => formData.maDV.includes(service.maDV));
+            const tenDVArray = filteredServices.map((service) => service.name);
+            const tenDVString = tenDVArray.join('; ');
+
+            const giaDVArray = filteredServices.map((service) => service.price);
+            const total = giaDVArray.reduce((acc, curr) => acc + parseInt(curr), 0);
+
+            setSelectedService(tenDVString);
+            form.setFieldValue('tenDV', selectedService);
+            form.setFieldValue('gia', formatNumber(total));
+
+            const sale = form.getFieldValue('sale');
+            form.setFieldValue('sale', formatNumber(sale));
+
+            let tongTien;
+
+            if (sale < 100) {
+                tongTien = total - (total * sale) / 100;
+            } else {
+                tongTien = total - sale;
+            }
+            form.setFieldValue('tongTien', formatNumber(tongTien));
+
+            setFormData((prevState) => ({
+                ...prevState,
+                tenKH: tenKHArray[0]?.hoTen,
+                loaiKH: typeKH,
+                tenDV: selectedService,
+                gia: total,
+                sale: sale,
+                tongTien: tongTien.toFixed(0),
+            }));
+        } else {
+            setSelectedService('');
+            form.setFieldValue('tenDV', '');
+            setFormData((prevState) => ({
+                ...prevState,
+                tenDV: selectedService,
+            }));
+        }
+    }, [formData.maDV, dataService, form, selectedService, formData.sale, formData.maKH, customer]);
 
     return (
         <div className=" bg-white p-[3.75rem]" style={{ padding: 60 }}>
-            <Form name="wrap" labelCol={{ flex: '300px' }} labelAlign="left">
+            <Form name="wrap" labelCol={{ flex: '300px' }} labelAlign="left" form={form}>
                 <div className="grid px-4 pt-15">
                     <Form.Item name="maKH" label="Mã khách hàng" initialValue={updateData?.maKH}>
-                        <Input
-                            id="maKH"
-                            allowClear
-                            placeholder="Nhập mã khách hàng"
-                            onChange={(e) => handleChangeForm('maKH', e.target.value)}
-                        ></Input>
+                        <Select
+                            mode="multiple"
+                            placeholder="Chọn mã khách hàng"
+                            onChange={(value) => setFormData((prevState) => ({ ...prevState, maKH: value }))}
+                            value={formData.maKH}
+                        >
+                            {customer.map((service) => (
+                                <Option key={service._id} value={service.maKH}>
+                                    {service.maKH}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                     <Form.Item name="tenKH" label="Tên khách hàng" initialValue={updateData?.tenKH}>
                         <Input
@@ -128,12 +180,22 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
                             allowClear
                             placeholder="Nhập tên khách hàng"
                             onChange={(e) => handleChangeForm('tenKH', e.target.value)}
+                            disabled
+                        ></Input>
+                    </Form.Item>
+                    <Form.Item name="loaiKH" label="Loại khách hàng" initialValue={updateData?.loaiKH}>
+                        <Input
+                            id="loaiKH"
+                            allowClear
+                            placeholder="Nhập loại khách hàng"
+                            onChange={(e) => handleChangeForm('loaiKH', e.target.value)}
+                            disabled
                         ></Input>
                     </Form.Item>
                     <Form.Item name="maDV" label="Mã dịch vụ" initialValue={updateData?.maDV}>
                         <Select
                             mode="multiple"
-                            placeholder="Chọn dịch vụ"
+                            placeholder="Chọn mã dịch vụ"
                             onChange={(value) => setFormData((prevState) => ({ ...prevState, maDV: value }))}
                             value={formData.maDV}
                         >
@@ -145,37 +207,21 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
                         </Select>
                     </Form.Item>
                     <Form.Item name="tenDV" label="Tên dịch vụ" initialValue={updateData?.tenDV}>
-                        <TextArea
-                            id="tenDV"
-                            placeholder="Nhập mã dịch vụ"
-                            className="w-full h-[80px]"
-                            onChange={(e) => handleChangeForm('tenDV', e.target.value)}
-                        />
+                        <TextArea placeholder="Tên dịch vụ" className="w-full h-[80px]" disabled />
                     </Form.Item>
                     <Form.Item name="gia" label="Giá dịch vụ" initialValue={updateData?.gia}>
-                        <Input
-                            id="gia"
-                            allowClear
-                            placeholder="Nhập giá dịch vụ"
-                            onChange={(e) => handleChangeForm('gia', e.target.value)}
-                        ></Input>
+                        <Input id="gia" allowClear placeholder="Nhập giá dịch vụ" disabled></Input>
                     </Form.Item>
                     <Form.Item name="sale" label="Giảm giá" initialValue={updateData?.sale}>
                         <Input
                             id="sale"
                             allowClear
-                            placeholder="Nhập thông tin giảm giá"
+                            placeholder="Nhập thông tin giảm giá (nếu là % thì chỉ cần nhập số)"
                             onChange={(e) => handleChangeForm('sale', e.target.value)}
                         ></Input>
                     </Form.Item>
                     <Form.Item name="tongTien" label="Tổng tiền" initialValue={updateData?.tongTien}>
-                        <Input
-                            id="tongTien"
-                            allowClear
-                            placeholder="Nhập thông tin thời gian thực hiện"
-                            value={formData.tongTien} // Đảm bảo giá trị được hiển thị từ state
-                            onChange={(e) => handleChangeForm('tongTien', e.target.value)}
-                        />
+                        <Input id="tongTien" allowClear placeholder="Tổng tiền = Giá dịch vụ - Giảm giá" disabled />
                     </Form.Item>
                     <Form.Item name="phuongThuc" label="Phương thức thanh toán" initialValue={updateData?.phuongThuc}>
                         <Select
