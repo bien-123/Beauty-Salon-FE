@@ -210,7 +210,7 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
                         <TextArea placeholder="Tên dịch vụ" className="w-full h-[80px]" disabled />
                     </Form.Item>
                     <Form.Item name="gia" label="Giá dịch vụ" initialValue={updateData?.gia}>
-                        <Input id="gia" allowClear placeholder="Nhập giá dịch vụ" disabled></Input>
+                        <Input id="gia" allowClear placeholder="Nhập giá dịch vụ" suffix="VNĐ" disabled></Input>
                     </Form.Item>
                     <Form.Item name="sale" label="Giảm giá" initialValue={updateData?.sale}>
                         <Input
@@ -221,7 +221,13 @@ const BillForm = ({ formType, setFormType, updateData, fetchData }) => {
                         ></Input>
                     </Form.Item>
                     <Form.Item name="tongTien" label="Tổng tiền" initialValue={updateData?.tongTien}>
-                        <Input id="tongTien" allowClear placeholder="Tổng tiền = Giá dịch vụ - Giảm giá" disabled />
+                        <Input
+                            id="tongTien"
+                            allowClear
+                            placeholder="Tổng tiền = Giá dịch vụ - Giảm giá"
+                            suffix="VNĐ"
+                            disabled
+                        />
                     </Form.Item>
                     <Form.Item name="phuongThuc" label="Phương thức thanh toán" initialValue={updateData?.phuongThuc}>
                         <Select
