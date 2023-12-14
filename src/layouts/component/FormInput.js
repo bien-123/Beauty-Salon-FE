@@ -140,7 +140,7 @@ const FormInput = () => {
 
                 <Form name="wrap" form={form} onFinish={handleClickSend}>
                   <div className="grid pt-15">
-                    <Form.Item name="tenDV" label="Tên dịch vụ" labelCol={{ span: 24 }} className="font-bold">
+                    <Form.Item name="tenDV" label="Tên dịch vụ (*)" labelCol={{ span: 24 }} className="font-bold">
                       <Select
                         mode="multiple"
                         placeholder="Chọn tên dịch vụ"
