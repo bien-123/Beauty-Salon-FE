@@ -15,6 +15,7 @@ const routes = {
     adminbill: '/adminbill',
     adminstaff: '/adminstaff',
     adminaccount: '/adminaccount',
+    adminwelcome: '/adminwelcome',
 };
 
 export default routes;

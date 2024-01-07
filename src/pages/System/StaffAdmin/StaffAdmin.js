@@ -45,6 +45,13 @@ const StaffAdmin = () => {
             align: 'center',
         },
         {
+            title: 'Khoa',
+            key: 'khoa',
+            dataIndex: 'khoa',
+            width: 100,
+            align: 'center',
+        },
+        {
             title: 'Số điện thoại',
             key: 'soDienThoai',
             dataIndex: 'soDienThoai',
@@ -186,7 +193,7 @@ const StaffAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ y: 490 }} />;
+                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 2000, y: 300 }} />;
                     </div>
                 </>
             ) : (

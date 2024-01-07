@@ -60,6 +60,11 @@ const StaffServer = {
             throw new Error(err);
         }
     },
+
+    async getStaff() {
+        const res = axios.get(API_STAFF_PAGE);
+        return res;
+    },
 };
 
 export default StaffServer;

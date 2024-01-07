@@ -5,6 +5,7 @@ import {
     ProfileOutlined,
     PayCircleOutlined,
     UserOutlined,
+    AuditOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'antd';
@@ -24,6 +25,7 @@ const items = [
     getItem(<Link to="/adminservices">Quản Lý Dịch Vụ</Link>, '3', <ExclamationCircleFilled />),
     getItem(<Link to="/adminappointment">Quản Lý Lịch Hẹn</Link>, '4', <ProfileOutlined />),
     getItem(<Link to="/adminbill">Quản Lý Hóa Đơn</Link>, '5', <PayCircleOutlined />),
+    getItem(<Link to="/adminwelcome">Phân công tiếp khách hàng</Link>, '7', <AuditOutlined />),
 ];
 const storedUserDataJSON = localStorage.getItem('userData');
 const storedUserData = JSON.parse(storedUserDataJSON);
@@ -52,6 +54,8 @@ const MenuAdmin = () => {
                 return ['5'];
             case '/adminaccount':
                 return ['6'];
+            case '/adminwelcome':
+                return ['7'];
             default:
                 return ['1'];
         }

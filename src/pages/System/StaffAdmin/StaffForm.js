@@ -14,6 +14,7 @@ const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
         ngaySinh: updateData?.ngaySinh || '',
         gioiTinh: updateData?.gioiTinh || '',
         chucVu: updateData?.chucVu || '',
+        khoa: updateData?.khoa || '',
         soDienThoai: updateData?.soDienThoai || '',
         email: updateData?.email || '',
         diaChi: updateData?.diaChi || '',
@@ -26,7 +27,7 @@ const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { maNV, hoTen, ngaySinh, gioiTinh, chucVu, soDienThoai, email, diaChi } = formData;
+        const { maNV, hoTen, ngaySinh, gioiTinh, chucVu, khoa, soDienThoai, email, diaChi } = formData;
 
         if (!maNV) {
             toaster.warning('Vui lòng nhập mã nhân viên!');
@@ -41,6 +42,8 @@ const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
             toaster.warning('Vui lòng chọn giới tính!');
         } else if (!chucVu) {
             toaster.warning('Vui lòng nhập chức vụ!');
+        } else if (!khoa) {
+            toaster.warning('Vui lòng nhập khoa!');
         } else if (!soDienThoai) {
             toaster.warning('Vui lòng nhập số điện thoại!');
         } else if (!isValidPhoneNumber(soDienThoai)) {
@@ -126,6 +129,14 @@ const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
                             <Option value="Bác sĩ">Bác sĩ</Option>
                             <Option value="Y tá">Y tá</Option>
                         </Select>
+                    </Form.Item>
+                    <Form.Item name="khoa" label="Khoa" initialValue={updateData?.khoa}>
+                        <Input
+                            id="khoa"
+                            allowClear
+                            placeholder="Nhập thông tin khoa"
+                            onChange={(e) => handleFormChange('khoa', e.target.value)}
+                        ></Input>
                     </Form.Item>
                     <Form.Item name="soDienThoai" label="Số điện thoại" initialValue={updateData?.soDienThoai}>
                         <Input

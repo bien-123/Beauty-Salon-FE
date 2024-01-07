@@ -71,6 +71,14 @@ const HeaderAdmin = () => {
                         href: '/adminaccount',
                     },
                 ];
+            case '/adminwelcome':
+                return [
+                    ...listBreadCrumbDefault,
+                    {
+                        title: 'Phân công tiếp khách hàng',
+                        href: '/adminwelcome',
+                    },
+                ];
             default:
                 return listBreadCrumbDefault;
         }

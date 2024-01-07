@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Table, Button, Modal, notification, Select, Tag } from 'antd';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import { Space, Table, Button, Modal, notification, Tag } from 'antd';
 
 import AppoimentServer from '../../../services/appoiment';
 import logo from '../../../assets/logo/index';
-import AppoimentForm from './AppoimentForm';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
+import WelcomeForm from './WelcomeForm';
+import { toaster } from 'evergreen-ui';
 
 const AppointmentAdmin = () => {
-    const { Option } = Select;
-    const formatted = (dateStr) => {
-        // const formattedDate = new Date(dateStr).toLocaleDateString('vi-VN');
-        const vnTime = dayjs.utc(dateStr).utcOffset(+7).format('HH:mm:ss YYYY-MM-DD');
-        return vnTime;
-    };
-
     const columns = [
         {
             title: 'Tên khách hàng',
@@ -80,26 +68,9 @@ const AppointmentAdmin = () => {
             align: 'center',
         },
         {
-            title: 'Ngày đăng ký',
-            key: 'createdAt',
-            dataIndex: 'createdAt',
-            width: 100,
-            align: 'center',
-            render: (text) => {
-                return <span>{formatted(text)}</span>;
-            },
-        },
-        {
-            title: 'Trạng thái',
-            key: 'status',
-            dataIndex: 'status',
-            width: 100,
-            align: 'center',
-        },
-        {
-            title: 'Kết quả',
-            key: 'result',
-            dataIndex: 'result',
+            title: 'Bác sĩ tiếp đón',
+            key: 'phanCong',
+            dataIndex: 'phanCong',
             width: 100,
             align: 'center',
         },
@@ -112,7 +83,7 @@ const AppointmentAdmin = () => {
                         src={logo.IconEdit}
                         alt="Icon edit"
                         className="cursor-pointer"
-                        onClick={() => handleUpdateForm(record)}
+                        onClick={() => handleUpdate(record)}
                     ></img>
                     <img
                         src={logo.IconDelete}
@@ -145,7 +116,7 @@ const AppointmentAdmin = () => {
 
     const fetchData = async () => {
         try {
-            const res = await AppoimentServer.searchAppoiment(`?q=${search}`);
+            const res = await AppoimentServer.searchWelcome(`?q=${search}`);
             if (res) {
                 setData(res?.data);
             }
@@ -163,14 +134,22 @@ const AppointmentAdmin = () => {
         setUpdateData(null);
     };
 
-    const handleUpdateForm = (item) => {
-        setFormType({ open: true, type: FORM_TYPE.UPDATED });
-        setUpdateData(item);
+    const handleUpdate = (item) => {
+        if (storedUserData?.PQ === 'ADMIN') {
+            setUpdateData(item);
+            setFormType({ open: true, type: FORM_TYPE.UPDATED });
+        } else {
+            toaster.warning('Bạn không có quyền truy cập tính năng này!');
+        }
     };
 
     const showModal = (item) => {
-        setID(item);
-        setIsModalOpen(true);
+        if (storedUserData?.PQ === 'ADMIN') {
+            setID(item);
+            setIsModalOpen(true);
+        } else {
+            toaster.warning('Bạn không có quyền truy cập tính năng này!');
+        }
     };
 
     const handleCancel = () => {
@@ -192,20 +171,13 @@ const AppointmentAdmin = () => {
         }
     };
 
-    const handleFormChange = async (e) => {
-        try {
-            const res = await AppoimentServer.searchAppoiment(`?q=${e}`);
-            if (res) {
-                setData(res?.data);
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
     useEffect(() => {
         fetchData();
     }, []);
+
+    const storedUserDataJSON = localStorage.getItem('userData');
+    const storedUserData = JSON.parse(storedUserDataJSON);
+    console.log(storedUserData);
 
     return (
         <>
@@ -227,34 +199,21 @@ const AppointmentAdmin = () => {
                                     Tìm kiếm
                                 </button>
                             </div>
-                            <Select
-                                placeholder="Nhập trạng thái của lịch hẹn"
-                                defaultValue="Tất cả"
-                                style={{
-                                    width: 140,
-                                    height: 36,
-                                }}
-                                onChange={(e) => handleFormChange(e)}
-                            >
-                                <Option value="">Tất cả</Option>
-                                <Option value="Đã xác nhận">Đã xác nhận</Option>
-                                <Option value="Chưa xác nhận">Chưa xác nhận</Option>
-                                <Option value="Thành công">Thành công</Option>
-                                <Option value="Thất bại">Thất bại</Option>
-                            </Select>
                         </div>
-                        <Space wrap size="large">
-                            <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
-                                Thêm mới
-                            </Button>
-                        </Space>
+                        {storedUserData?.PQ === 'ADMIN' && (
+                            <Space wrap size="large">
+                                <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
+                                    Thêm mới
+                                </Button>
+                            </Space>
+                        )}
                     </div>
                     <div>
                         <Table columns={columns} dataSource={data} size="small" scroll={{ x: 2000, y: 300 }} />
                     </div>
                 </>
             ) : (
-                <AppoimentForm
+                <WelcomeForm
                     formType={formType}
                     setFormType={setFormType}
                     updateData={updateData}

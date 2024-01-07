@@ -20,6 +20,15 @@ const AppoimentServer = {
         }
     },
 
+    async searchWelcome(query) {
+        try {
+            const res = await axios.get(`${API_APPOIMENT_PAGE}/welcome${query}`);
+            return res;
+        } catch (err) {
+            throw new Error(err);
+        }
+    },
+
     async updateAppoiment(id, formData) {
         try {
             const res = await axios.put(`${API_APPOIMENT_PAGE}/update/${id}`, formData);
