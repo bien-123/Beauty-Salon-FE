@@ -5,6 +5,7 @@ import AppoimentServer from '../../../services/appoiment';
 import logo from '../../../assets/logo/index';
 import WelcomeForm from './WelcomeForm';
 import { toaster } from 'evergreen-ui';
+import * as XLSX from 'xlsx';
 
 const AppointmentAdmin = () => {
     const columns = [
@@ -64,6 +65,13 @@ const AppointmentAdmin = () => {
             title: 'Ghi chú',
             key: 'tinhTrangHienTai',
             dataIndex: 'tinhTrangHienTai',
+            width: 100,
+            align: 'center',
+        },
+        {
+            title: 'NV xác nhận',
+            key: 'staff_confirmed',
+            dataIndex: 'staff_confirmed',
             width: 100,
             align: 'center',
         },
@@ -171,6 +179,43 @@ const AppointmentAdmin = () => {
         }
     };
 
+    const handleExportToExcel = () => {
+        // Tạo dữ liệu Excel từ 'data'
+        const exportData = data.map((item) => ({
+            'Tên khách hàng': item.tenKH,
+            'Số điện thoại': item.sdt,
+            'Ngày hẹn': item.ngayHen,
+            'Thời gian': item.gioHen,
+            'Tên DV': item.name.join(', '), // Kết hợp các phần tử trong mảng 'name' thành chuỗi
+            'Ghi chú': item.tinhTrangHienTai,
+            'Bác sĩ tiếp đón': item.phanCong,
+        }));
+
+        // Tạo workbook và worksheet từ dữ liệu xuất
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(exportData);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Appointments');
+
+        // Tạo blob từ workbook
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+        });
+
+        // Tạo URL cho blob và tạo một link tải xuống
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'welcome_data.xlsx');
+        document.body.appendChild(link);
+
+        // Simulate click để tải xuống
+        link.click();
+
+        // Xóa link sau khi đã tải xuống
+        document.body.removeChild(link);
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -201,9 +246,12 @@ const AppointmentAdmin = () => {
                             </div>
                         </div>
                         {storedUserData?.PQ === 'ADMIN' && (
-                            <Space wrap size="large">
+                            <Space wrap size="large" className="flex !flex-nowrap">
                                 <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
                                     Thêm mới
+                                </Button>
+                                <Button className="bg-[#689f38] text-white" onClick={handleExportToExcel}>
+                                    Xuất file Excel
                                 </Button>
                             </Space>
                         )}

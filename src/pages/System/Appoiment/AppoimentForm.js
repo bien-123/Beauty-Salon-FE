@@ -6,10 +6,12 @@ import dayjs from 'dayjs';
 import AppoimentServer from '../../../services/appoiment';
 import { isValidPhoneNumber } from '../../../constans/shared';
 import ServicesServer from '../../../services/services';
+import { getDataLocalStorage } from '../../../constans/auth';
 
 const { Option } = Select;
 
 const AppoimentForm = ({ formType, setFormType, updateData, fetchData }) => {
+    const dataUser = getDataLocalStorage();
     const [formData, setFormData] = useState({
         tenKH: updateData?.tenKH || '',
         sdt: updateData?.sdt || '',
@@ -19,6 +21,7 @@ const AppoimentForm = ({ formType, setFormType, updateData, fetchData }) => {
         tinhTrangHienTai: updateData?.tinhTrangHienTai || '',
         status: updateData?.status || '',
         result: updateData?.result || '',
+        staff_confirmed: dataUser?.maNV || '',
     });
 
     const [dataService, setDataService] = useState([]);

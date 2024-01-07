@@ -7,11 +7,13 @@ import StaffServer from '../../../services/staff';
 import { isValidPhoneNumber } from '../../../constans/shared';
 import dayjs from 'dayjs';
 import ServicesServer from '../../../services/services';
+import { getDataLocalStorage } from '../../../constans/auth';
 
 const { Option } = Select;
 
 const WelcomeForm = ({ formType, setFormType, updateData, fetchData }) => {
     const [form] = Form.useForm();
+    const dataUser = getDataLocalStorage();
     const [formData, setFormData] = useState({
         tenKH: updateData?.tenKH || '',
         sdt: updateData?.sdt || '',
@@ -77,7 +79,7 @@ const WelcomeForm = ({ formType, setFormType, updateData, fetchData }) => {
             return;
         } else if (formType.type === 'created' && updateData === null) {
             try {
-                const res = await AppoimentServer.addAppoiment({ ...formData });
+                const res = await AppoimentServer.addAppoiment({ ...formData, staff_confirmed: dataUser?.maNV || '' });
                 if (res) {
                     toaster.success('Thêm thông tin dịch vụ thành công!');
                     setFormType({ ...formType, open: false });

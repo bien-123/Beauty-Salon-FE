@@ -6,6 +6,7 @@ import BillServer from '../../../services/bill';
 import logo from '../../../assets/logo/index';
 import BillForm from './BillForm';
 import { formatNumber } from '../../../constans/shared';
+import * as XLSX from 'xlsx';
 
 const BillAdmin = () => {
     const columns = [
@@ -136,6 +137,7 @@ const BillAdmin = () => {
         {
             title: 'Action',
             key: 'action',
+            width: 100,
             render: (_, record) => (
                 <Space size="middle">
                     <img
@@ -144,6 +146,13 @@ const BillAdmin = () => {
                         className="cursor-pointer"
                         onClick={() => handleUpdateForm(record)}
                     ></img>
+                    <img
+                        src={logo.IconExportExcel}
+                        alt="Icon export excel"
+                        className="cursor-pointer"
+                        onClick={() => handleExportDetailBill(record)}
+                    ></img>
+
                     <img
                         src={logo.IconDelete}
                         alt="Icon delete"
@@ -231,6 +240,90 @@ const BillAdmin = () => {
         }
     };
 
+    const handleExportToExcel = () => {
+        // Tạo dữ liệu Excel từ 'data'
+        const exportData = data.map((item) => ({
+            'Mã HĐ': item._id,
+            'Mã KH': item.maKH.join(', '),
+            'Tên khách hàng': item.tenKH,
+            'Loại khách hàng': item.loaiKH,
+            'Mã DV': item.maDV.join(', '),
+            'Tên DV': item.tenDV,
+            Giá: item.gia,
+            'Khuyến mãi': item.sale,
+            'Tổng tiền': item.tongTien,
+            'Phương thức': item.phuongThuc,
+            'Ghi chú': item.ghiChu,
+            'Mã NV': item.maNV,
+            'Ngày tạo': item.createdAt,
+        }));
+
+        // Tạo workbook và worksheet từ dữ liệu xuất
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(exportData);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Appointments');
+
+        // Tạo blob từ workbook
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+        });
+
+        // Tạo URL cho blob và tạo một link tải xuống
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'bill_data.xlsx');
+        document.body.appendChild(link);
+
+        // Simulate click để tải xuống
+        link.click();
+
+        // Xóa link sau khi đã tải xuống
+        document.body.removeChild(link);
+    };
+
+    const handleExportDetailBill = (item) => {
+        const formattedSale = item.sale > 100 ? `${formatNumber(Number(item.sale))} VNĐ` : `${item.sale} %`;
+        const formattedTotal = `${formatNumber(Number(item.tongTien))} VNĐ`;
+        const formattedCreatedAt = formatted(item.createdAt);
+
+        const exportDataDetail = [
+            ['Thông tin chi tiết hóa đơn'],
+            ['Mã HĐ:', item._id],
+            ['Mã KH:', item.maKH.join(', ')],
+            ['Tên khách hàng:', item.tenKH],
+            ['Loại khách hàng:', item.loaiKH],
+            ['Mã dịch vụ:', item.maDV.join(', ')],
+            ['Tên dịch vụ:', item.tenDV],
+            ['Giá:', `${formatNumber(Number(item.gia))} VNĐ`],
+            ['Khuyến mãi:', formattedSale],
+            ['Tổng tiền:', formattedTotal],
+            ['Phương thức thanh toán:', item.phuongThuc],
+            ...(item.ghiChu ? [['', '']] : []), // Tạo một hàng trống nếu có ghi chú để căn chỉnh dữ liệu
+            ...(item.ghiChu ? [['Ghi chú:', item.ghiChu]] : []), // Kiểm tra và thêm ghi chú nếu tồn tại giá trị
+            ['Mã NV:', item.maNV],
+            ['Ngày tạo:', formattedCreatedAt],
+        ];
+
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.aoa_to_sheet(exportDataDetail);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'DetailBill');
+
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'detail_bill_data.xlsx');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -254,9 +347,12 @@ const BillAdmin = () => {
                                 Tìm kiếm
                             </button>
                         </div>
-                        <Space wrap size="large">
+                        <Space wrap size="large" className="flex !flex-nowrap">
                             <Button className="bg-[#02a7aa] text-white" onClick={handleAddNewForm}>
                                 Thêm mới
+                            </Button>
+                            <Button className="bg-[#689f38] text-white" onClick={handleExportToExcel}>
+                                Xuất file Excel
                             </Button>
                         </Space>
                     </div>
