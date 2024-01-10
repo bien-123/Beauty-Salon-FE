@@ -53,13 +53,13 @@ const BillAdmin = () => {
             render: (_, { maDV }) => (
                 <>
                     {maDV.map((tag) => {
-                        let color = tag.length > 5 ? 'geekblue' : 'green';
+                        let color = tag?.length > 5 ? 'geekblue' : 'green';
                         if (tag === 'loser') {
                             color = 'volcano';
                         }
                         return (
                             <Tag color={color} key={tag}>
-                                {tag.toUpperCase()}
+                                {tag?.toUpperCase()}
                             </Tag>
                         );
                     })}
