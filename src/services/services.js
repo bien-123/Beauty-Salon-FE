@@ -16,6 +16,15 @@ const ServicesServer = {
         }
     },
 
+    async searchPagination(query) {
+        try {
+            const res = await axios.get(`${API_SERVICES_PAGE}/searchp${query}`);
+            return res.data; // Trả về chỉ dữ liệu từ response, không phải toàn bộ response object
+        } catch (error) {
+            throw new Error(error); // Ném ra lỗi nếu có bất kỳ lỗi nào xảy ra trong quá trình gọi API
+        }
+    },
+
     async addServices(query) {
         try {
             const res = await axios.post(`${API_SERVICES_PAGE}/add`, query);

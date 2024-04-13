@@ -1,35 +1,46 @@
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useCallback } from 'react';
 import ServicesServer from '../../../services/services';
 import logo from '../../../assets/logo/index';
 import { formatNumber } from '../../../constans/shared';
+import Pagination from '../Pagiantion';
 
 const Content = () => {
     const headerTableTitle = ['Mã Dịch Vụ', 'Tên Dịch Vụ', 'Mô tả', 'Giá Dịch vụ', 'Thời gian'];
     const [search, setSearch] = useState('');
     const [success, setSuccess] = useState(true);
     const [duLieu, setDuLieu] = useState([]);
-
-    const fetchData = async () => {
-        try {
-            const res = await ServicesServer.searchServices(`?q=${search}`);
-            if (res) {
-                setDuLieu(res);
-                setSuccess(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const pageSize = 3;
+    const fetchData = useCallback(
+        async (page) => {
+            try {
+                const res = await ServicesServer.searchPagination(`?q=${search}&page=${page}&pageSize=${pageSize}`);
+                if (res) {
+                    setDuLieu(res.results);
+                    setTotalPages(res.totalPages);
+                    setSuccess(true);
+                }
+            } catch (error) {
+                setSuccess(false);
+                console.log(error);
             }
-        } catch (error) {
-            setSuccess(false);
-            console.log(error);
-        }
-    };
+        },
+        [search, pageSize],
+    );
 
     const handleSearch = () => {
-        fetchData();
+        fetchData(1);
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        fetchData(page);
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData(currentPage);
+    }, [currentPage, fetchData]);
 
     return (
         <div className="mt-10">
@@ -74,6 +85,9 @@ const Content = () => {
                     </div>
                 )}
             </table>
+            {totalPages > 1 && (
+                <Pagination currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange} />
+            )}
         </div>
     );
 };
