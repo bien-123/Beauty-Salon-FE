@@ -3,8 +3,12 @@ import axios from './axios';
 
 const StaffServer = {
     async login(maNV, password) {
-        const res = await axios.post(`${API_STAFF_PAGE}/login`, { maNV: maNV, password: password });
-        return res?.data;
+        try {
+            const res = await axios.post(`${API_STAFF_PAGE}/login`, { maNV: maNV, password: password });
+            return res?.data;
+        } catch (err) {
+            throw new Error(err);
+        }
     },
 
     async addStaff(body) {

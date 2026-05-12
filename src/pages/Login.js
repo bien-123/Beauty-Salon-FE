@@ -31,20 +31,26 @@ const Login = () => {
     };
 
     const handleClickSend = async () => {
-        if (!loginForm.maNV) {
-            toaster.warning('Mã nhân viên không được để trống!');
-        } else if (!loginForm.password) {
-            toaster.warning('Mật khẩu không được để trống!');
-        } else {
-            const res = await StaffServer.login(loginForm.maNV, loginForm.password);
-            if (res && res.success) {
-                toaster.success('Đăng nhập thành công!');
-                const userDataJSON = JSON.stringify(res?.arr);
-                localStorage.setItem('userData', userDataJSON);
-                navigate('/admin');
+        try {
+            if (!loginForm.maNV) {
+                toaster.warning('Mã nhân viên không được để trống!');
+            } else if (!loginForm.password) {
+                toaster.warning('Mật khẩu không được để trống!');
             } else {
-                toaster.warning(res?.message || res?.response?.message || 'Đã xảy ra lỗi');
+                const res = await StaffServer.login(loginForm.maNV, loginForm.password);
+                if (res && res.success) {
+                    toaster.success('Đăng nhập thành công!');
+                    const userDataJSON = JSON.stringify(res?.arr);
+                    localStorage.setItem('userData', userDataJSON);
+                    navigate('/admin');
+                } else {
+                    toaster.warning(res?.message || res?.response?.message || 'Đã xảy ra lỗi');
+                }
             }
+        } catch (err) {
+            toaster.danger(err?.message || 'Đăng nhập thất bại!', {
+                duration: 5,
+            });
         }
     };
 
