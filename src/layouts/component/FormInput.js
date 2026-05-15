@@ -5,6 +5,7 @@ import { isValidPhoneNumber } from '../../constans/shared';
 import AppoimentServer from '../../services/appoiment';
 import { toaster } from 'evergreen-ui';
 import ServicesServer from '../../services/services';
+import SendTelegram from '../../services/send_telegram';
 
 const FormInput = () => {
     const [addAppoiment, setAddAppoiment] = useState({
@@ -54,6 +55,18 @@ const FormInput = () => {
             try {
                 const res = await AppoimentServer.addAppoiment({ ...addAppoiment });
                 if (res) {
+                    // format message telegram
+                    const message = `📌 <b>ĐĂNG KÝ TƯ VẤN MỚI:</b>
+👤 <b>Họ tên:</b> ${addAppoiment.tenKH}
+📞 <b>SĐT:</b> ${addAppoiment.sdt}
+📅 <b>Ngày hẹn:</b> ${addAppoiment.ngayHen}
+⏰ <b>Giờ hẹn:</b> ${addAppoiment.gioHen}
+🛠 <b>Dịch vụ:</b>
+${Array.isArray(addAppoiment.name) ? addAppoiment.name.join(', ') : addAppoiment.name}
+📝 <b>Ghi chú:</b>
+${addAppoiment.tinhTrangHienTai || 'Không có'}
+`;
+                    await SendTelegram.sendTelegram(message);
                     toaster.success('Đặt lịch hẹn thành công!');
                     form.resetFields();
                     resetForm();
