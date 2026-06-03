@@ -252,6 +252,7 @@ const AppointmentAdmin = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -300,7 +301,13 @@ const AppointmentAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 2000, y: 300 }} />
+                        <Table
+                            columns={columns}
+                            dataSource={data}
+                            size="small"
+                            scroll={{ x: 2000, y: 300 }}
+                            rowKey={(record) => record._id || record.id}
+                        />
                     </div>
                 </>
             ) : (

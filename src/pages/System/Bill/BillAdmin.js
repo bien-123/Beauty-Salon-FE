@@ -161,7 +161,6 @@ const BillAdmin = () => {
                     ></img>
                 </Space>
             ),
-            width: 50,
             align: 'center',
             fixed: 'right',
         },
@@ -326,6 +325,7 @@ const BillAdmin = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -357,7 +357,13 @@ const BillAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 3000, y: 300 }} />;
+                        <Table
+                            columns={columns}
+                            dataSource={data}
+                            size="small"
+                            scroll={{ x: 3000, y: 300 }}
+                            rowKey={(record) => record._id || record.id}
+                        />
                     </div>
                 </>
             ) : (

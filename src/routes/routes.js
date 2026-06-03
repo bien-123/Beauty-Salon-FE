@@ -35,13 +35,13 @@ const publicRoutes = [
 // dùng cho Router phải đăng nhập mới vào đc
 const privateRoutes = [
     { path: config.routes.admin, component: HomeAdmin },
-    { path: config.routes.admincustomer, component: CustomerAdmin },
-    { path: config.routes.adminservices, component: ServiceAdmin },
-    { path: config.routes.adminappointment, component: AppointmentAdmin },
-    { path: config.routes.adminbill, component: BillAdmin },
-    { path: config.routes.adminstaff, component: StaffAdmin },
-    { path: config.routes.adminaccount, component: AccountAdmin },
-    { path: config.routes.adminwelcome, component: WelcomeAdmin },
+    { path: config.routes.admin_customer, component: CustomerAdmin },
+    { path: config.routes.admin_services, component: ServiceAdmin },
+    { path: config.routes.admin_appointment, component: AppointmentAdmin },
+    { path: config.routes.admin_bill, component: BillAdmin },
+    { path: config.routes.admin_staff, component: StaffAdmin },
+    { path: config.routes.admin_account, component: AccountAdmin },
+    { path: config.routes.admin_welcome, component: WelcomeAdmin },
     { path: config.routes.admin_department, component: DepartmentAdmin },
 ];
 

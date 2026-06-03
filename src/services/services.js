@@ -52,14 +52,14 @@ const ServicesServer = {
         }
     },
 
-    async getBill() {
-        try {
-            const res = await axios.get(`${API_SERVICES_PAGE}/searchbill`);
-            return res;
-        } catch (err) {
-            throw new Error(err);
-        }
-    },
+    // async getBill() {
+    //     try {
+    //         const res = await axios.get(`${API_SERVICES_PAGE}/searchbill`);
+    //         return res;
+    //     } catch (err) {
+    //         throw new Error(err);
+    //     }
+    // },
 };
 
 export default ServicesServer;

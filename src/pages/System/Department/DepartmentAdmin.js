@@ -39,8 +39,8 @@ const DepartmentAdmin = () => {
             align: 'center',
             render: (_, { manager }) => (
                 <>
-                    {manager.map((nhanvien) => {
-                        return <Tag>{nhanvien.hoTen}</Tag>;
+                    {manager.map((nhan_vien) => {
+                        return <Tag key={nhan_vien._id}>{nhan_vien.hoTen}</Tag>;
                     })}
                 </>
             ),
@@ -243,7 +243,13 @@ const DepartmentAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ y: 490 }} />;
+                        <Table
+                            columns={columns}
+                            dataSource={data}
+                            size="small"
+                            scroll={{ y: 490 }}
+                            rowKey={(record) => record._id || record.id}
+                        />
                     </div>
                 </>
             ) : (

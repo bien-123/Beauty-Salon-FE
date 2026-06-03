@@ -23,60 +23,60 @@ const HeaderAdmin = () => {
 
     const listBreadCrumbItems = useMemo(() => {
         switch (location.pathname) {
-            case '/adminstaff':
+            case '/admin-staff':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Quản lý nhân viên',
-                        href: '/adminstaff',
+                        href: '/admin-staff',
                     },
                 ];
-            case '/admincustomer':
+            case '/admin-customer':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Quản lý khách hàng',
-                        href: '/admincustomer',
+                        href: '/admin-customer',
                     },
                 ];
-            case '/adminservices':
+            case '/admin-services':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Quản lý dịch vụ',
-                        href: '/adminservices',
+                        href: '/admin-services',
                     },
                 ];
-            case '/adminappointment':
+            case '/admin-appointment':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Quản lý lịch hẹn',
-                        href: '/adminappointment',
+                        href: '/admin-appointment',
                     },
                 ];
-            case '/adminbill':
+            case '/admin-bill':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Quản lý hóa đơn',
-                        href: '/adminbill',
+                        href: '/admin-bill',
                     },
                 ];
-            case '/adminaccount':
+            case '/admin-account':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Quản lý tài khoản',
-                        href: '/adminaccount',
+                        href: '/admin-account',
                     },
                 ];
-            case '/adminwelcome':
+            case '/admin-welcome':
                 return [
                     ...listBreadCrumbDefault,
                     {
                         title: 'Phân công tiếp khách hàng',
-                        href: '/adminwelcome',
+                        href: '/admin-welcome',
                     },
                 ];
             case '/admin-department':

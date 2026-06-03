@@ -22,19 +22,19 @@ const getItem = (label, key, icon, children) => {
 };
 
 const items = [
-    getItem(<Link to="/admincustomer">Quản Lý Khách Hàng</Link>, '2', <CustomerServiceOutlined />),
-    getItem(<Link to="/adminservices">Quản Lý Dịch Vụ</Link>, '3', <ExclamationCircleFilled />),
-    getItem(<Link to="/adminappointment">Quản Lý Lịch Hẹn</Link>, '4', <ProfileOutlined />),
-    getItem(<Link to="/adminbill">Quản Lý Hóa Đơn</Link>, '5', <PayCircleOutlined />),
-    getItem(<Link to="/adminwelcome">Phân công tiếp khách hàng</Link>, '7', <AuditOutlined />),
+    getItem(<Link to="/admin-customer">Quản Lý Khách Hàng</Link>, '2', <CustomerServiceOutlined />),
+    getItem(<Link to="/admin-services">Quản Lý Dịch Vụ</Link>, '3', <ExclamationCircleFilled />),
+    getItem(<Link to="/admin-appointment">Quản Lý Lịch Hẹn</Link>, '4', <ProfileOutlined />),
+    getItem(<Link to="/admin-bill">Quản Lý Hóa Đơn</Link>, '5', <PayCircleOutlined />),
+    getItem(<Link to="/admin-welcome">Phân công tiếp khách hàng</Link>, '7', <AuditOutlined />),
 ];
 const storedUserDataJSON = localStorage.getItem('userData');
 const storedUserData = JSON.parse(storedUserDataJSON);
 
 if (storedUserData?.PQ?.toUpperCase() === 'ADMIN') {
     items.push(
-        getItem(<Link to="/adminstaff">Quản Lý Nhân Viên</Link>, '1', <HomeOutlined className="text-lg" />),
-        getItem(<Link to="/adminaccount">Quản Lý Tài Khoản</Link>, '6', <UserOutlined />),
+        getItem(<Link to="/admin-staff">Quản Lý Nhân Viên</Link>, '1', <HomeOutlined className="text-lg" />),
+        getItem(<Link to="/admin-account">Quản Lý Tài Khoản</Link>, '6', <UserOutlined />),
         getItem(<Link to="/admin-department">Quản Lý Khoa</Link>, '8', <ApartmentOutlined />),
     );
 }
@@ -44,19 +44,19 @@ const MenuAdmin = () => {
 
     const selectedMenuKey = useMemo(() => {
         switch (location.pathname) {
-            case '/adminstaff':
+            case '/admin-staff':
                 return ['1'];
-            case '/admincustomer':
+            case '/admin-customer':
                 return ['2'];
-            case '/adminservices':
+            case '/admin-services':
                 return ['3'];
-            case '/adminappointment':
+            case '/admin-appointment':
                 return ['4'];
-            case '/adminbill':
+            case '/admin-bill':
                 return ['5'];
-            case '/adminaccount':
+            case '/admin-account':
                 return ['6'];
-            case '/adminwelcome':
+            case '/admin-welcome':
                 return ['7'];
             case '/admin-department':
                 return ['8'];

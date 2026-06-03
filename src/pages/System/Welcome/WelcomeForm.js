@@ -41,9 +41,9 @@ const WelcomeForm = ({ formType, setFormType, updateData, fetchData }) => {
     };
     const getServices = async () => {
         try {
-            const res = await ServicesServer.getBill();
-            if (res?.data?.arr) {
-                setDataService(res.data.arr);
+            const res = await ServicesServer.getServices();
+            if (res?.data) {
+                setDataService(res?.data);
             }
         } catch (error) {
             console.log(error);

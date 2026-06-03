@@ -125,6 +125,7 @@ const AccountAdmin = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -156,7 +157,13 @@ const AccountAdmin = () => {
                         </Space>
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ y: 490 }} />;
+                        <Table
+                            columns={columns}
+                            dataSource={data}
+                            size="small"
+                            scroll={{ y: 490 }}
+                            rowKey={(record) => record._id || record.id}
+                        />
                     </div>
                 </>
             ) : (

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BOT_TOKEN = '8897298885:AAGczXSYJ-TkXzRElwTPd23dSYfFQHth2ZI';
-const CHAT_ID = '-1002223344733';
+const BOT_TOKEN = process.env.REACT_APP_BOT_TOKEN;
+const CHAT_ID = process.env.REACT_APP_CHAT_ID;
 
 const SendTelegram = {
     async sendTelegram(message) {

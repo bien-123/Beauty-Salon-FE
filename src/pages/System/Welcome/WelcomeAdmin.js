@@ -223,7 +223,6 @@ const AppointmentAdmin = () => {
 
     const storedUserDataJSON = localStorage.getItem('userData');
     const storedUserData = JSON.parse(storedUserDataJSON);
-    console.log(storedUserData);
 
     return (
         <>
@@ -258,7 +257,13 @@ const AppointmentAdmin = () => {
                         )}
                     </div>
                     <div>
-                        <Table columns={columns} dataSource={data} size="small" scroll={{ x: 2000, y: 300 }} />
+                        <Table
+                            columns={columns}
+                            dataSource={data}
+                            size="small"
+                            scroll={{ x: 2000, y: 300 }}
+                            rowKey={(record) => record._id || record.id}
+                        />
                     </div>
                 </>
             ) : (
