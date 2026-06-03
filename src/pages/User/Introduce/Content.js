@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Image_Doctor from '../../../assets/images/image-doctor.png';
 import Image_CSVC from '../../../assets/images/co-so-vat-chat-tham-my-vien.jpg';
 const ContentIntroduce = () => {

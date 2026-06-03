@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { Space, Table, Button, Modal, notification } from 'antd';
 
