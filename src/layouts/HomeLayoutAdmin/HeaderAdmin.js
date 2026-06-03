@@ -79,6 +79,14 @@ const HeaderAdmin = () => {
                         href: '/adminwelcome',
                     },
                 ];
+            case '/admin-department':
+                return [
+                    ...listBreadCrumbDefault,
+                    {
+                        title: 'Quản lý khoa',
+                        href: '/admin-department',
+                    },
+                ];
             default:
                 return listBreadCrumbDefault;
         }
@@ -106,7 +114,10 @@ const HeaderAdmin = () => {
                 <Breadcrumb separator=">" items={listBreadCrumbItems} />
             </div>
             <div className="flex items-center h-full space-x-3">
-                <BellFilled />
+                <div className="bell-wrapper">
+                    <BellFilled className="bell-icon" />
+                    <span className="badge">50</span>
+                </div>
                 <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
                 <div className="flex flex-col leading-none">
                     <p className="text-sm font-bold">{dataUser?.maNV}</p>

@@ -51,7 +51,17 @@ const StaffAdmin = () => {
             dataIndex: 'khoa',
             width: 100,
             align: 'center',
+            // Thêm hàm render để trích xuất tên khoa ra hiển thị
+            render: (khoa) => {
+                // Nếu trường khoa là một Object đã được populate thành công từ backend
+                if (khoa && typeof khoa === 'object') {
+                    return khoa.departmentName || 'Chưa rõ khoa';
+                }
+                // Trường hợp phòng hờ nếu backend chỉ trả về chuỗi ID thô chưa populate
+                return khoa || <i className="text-gray-400">Chưa xếp khoa</i>;
+            },
         },
+
         {
             title: 'Số điện thoại',
             key: 'soDienThoai',
@@ -203,6 +213,7 @@ const StaffAdmin = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

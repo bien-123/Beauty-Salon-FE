@@ -165,3 +165,39 @@ body.sidebar-collapsed {
 .rs-modal-content {
     width: 400px !important;
 }
+
+.bell-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: fit-content;
+}
+
+.bell-icon {
+    font-size: 25px;
+    color: #01babd;
+}
+
+/* badge số */
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1;
+}

@@ -143,7 +143,7 @@ const AppointmentAdmin = () => {
     };
 
     const handleUpdate = (item) => {
-        if (storedUserData?.PQ === 'ADMIN') {
+        if (storedUserData?.PQ?.toUpperCase() === 'ADMIN') {
             setUpdateData(item);
             setFormType({ open: true, type: FORM_TYPE.UPDATED });
         } else {
@@ -152,7 +152,7 @@ const AppointmentAdmin = () => {
     };
 
     const showModal = (item) => {
-        if (storedUserData?.PQ === 'ADMIN') {
+        if (storedUserData?.PQ?.toUpperCase() === 'ADMIN') {
             setID(item);
             setIsModalOpen(true);
         } else {
@@ -218,6 +218,7 @@ const AppointmentAdmin = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, []);
 
     const storedUserDataJSON = localStorage.getItem('userData');

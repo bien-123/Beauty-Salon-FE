@@ -1,13 +1,31 @@
 import { Button, Form, Input, DatePicker, Space, Select } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toaster } from 'evergreen-ui';
 
 import StaffServer from '../../../services/staff';
+import DepartmentServer from '../../../services/department';
 import { isValidPhoneNumber, isEmail } from '../../../constans/shared';
 
 const { Option } = Select;
 
 const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
+    // Lưu danh sách toàn bộ khoa lấy từ hệ thống về để chọn
+    const [departmentList, setDepartmentList] = useState([]);
+    useEffect(() => {
+        const fetchDepartment = async () => {
+            try {
+                // Thay URL này bằng API lấy danh sách nhân viên thực tế của bạn
+                const res = await DepartmentServer.getDepartment();
+                if (res.data) {
+                    setDepartmentList(res.data);
+                }
+            } catch (err) {
+                console.error('Lỗi khi lấy danh sách khoa:', err);
+            }
+        };
+        fetchDepartment();
+    }, []);
+
     const [formData, setFormData] = useState({
         maNV: updateData?.maNV || '',
         hoTen: updateData?.hoTen || '',
@@ -130,13 +148,23 @@ const StaffForm = ({ formType, setFormType, updateData, fetchData }) => {
                             <Option value="Y tá">Y tá</Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item name="khoa" label="Khoa" initialValue={updateData?.khoa}>
-                        <Input
-                            id="khoa"
+
+                    {/* Ô CHỌN TRƯỞNG PHÒNG (Tích hợp Select Multiple của Ant Design) */}
+                    <Form.Item name="khoa" label="Khoa" initialValue={formData.khoa}>
+                        <Select
                             allowClear
-                            placeholder="Nhập thông tin khoa"
-                            onChange={(e) => handleFormChange('khoa', e.target.value)}
-                        ></Input>
+                            style={{ width: '100%' }}
+                            placeholder="Chọn (các) trưởng phòng phụ trách"
+                            value={formData?.khoa}
+                            onChange={(value) => handleFormChange('khoa', value)}
+                            optionFilterProp="children" // Cho phép gõ chữ để tìm kiếm nhân viên nhanh
+                        >
+                            {departmentList.map((department) => (
+                                <Option key={department._id} value={department._id}>
+                                    {department.departmentCode} ({department.departmentName})
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                     <Form.Item name="soDienThoai" label="Số điện thoại" initialValue={updateData?.soDienThoai}>
                         <Input

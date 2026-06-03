@@ -1,5 +1,5 @@
-export const API_ENDPOINT_PUBLIC = 'https://beauty-salon-be.onrender.com';
-// export const API_ENDPOINT_PUBLIC = 'http://localhost:5000';
+// export const API_ENDPOINT_PUBLIC = 'https://beauty-salon-be.onrender.com';
+export const API_ENDPOINT_PUBLIC = 'http://localhost:5000';
 
 export const API_STAFF_PAGE = `${API_ENDPOINT_PUBLIC}/staff`;
 
@@ -10,3 +10,5 @@ export const API_SERVICES_PAGE = `${API_ENDPOINT_PUBLIC}/service`;
 export const API_CLIENT_PAGE = `${API_ENDPOINT_PUBLIC}/client`;
 
 export const API_BILL_PAGE = `${API_ENDPOINT_PUBLIC}/bill`;
+
+export const API_DEPARTMENT_PAGE = `${API_ENDPOINT_PUBLIC}/department`;

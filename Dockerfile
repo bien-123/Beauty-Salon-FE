@@ -45,3 +45,12 @@ CMD ["serve", "-s", "build", "-l", "3000"]
 
 # Xóa container
 # docker rm -f beauty-salon-fe
+
+# Check 100 log cuối của Container
+# docker logs -t --tail 100 beauty-salon-fe
+
+# Check log của container theo thời gian thực
+# docker logs -f beauty-salon-fe
+
+# Bash vào Container
+# docker exec -it sim_crawler bash

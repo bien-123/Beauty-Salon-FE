@@ -16,6 +16,7 @@ const routes = {
     adminstaff: '/adminstaff',
     adminaccount: '/adminaccount',
     adminwelcome: '/adminwelcome',
+    admin_department: '/admin-department',
 };
 
 export default routes;
